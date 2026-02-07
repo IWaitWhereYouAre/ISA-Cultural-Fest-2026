@@ -3,189 +3,181 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>ISA CULTURAL FEST 2026 | THE LEGACY</title>
+    <title>ISA CULTURAL FEST 2026 | THE COLLECTIVE LEGACY</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@200;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --gold: #C5A059;
-            --gold-dim: #866d3d;
-            --black: #050505;
-            --off-white: #E8E8E8;
+            --gold-glow: rgba(197, 160, 89, 0.5);
+            --black: #080808;
+            --white: #F4F4F4;
             --glass: rgba(255, 255, 255, 0.03);
         }
 
         * { box-sizing: border-box; cursor: none; }
+        
         body {
-            margin: 0; font-family: 'Inter', sans-serif;
-            background-color: var(--black); color: var(--off-white);
-            overflow-x: hidden; scroll-behavior: smooth;
+            margin: 0;
+            background-color: var(--black);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* --- ARISTOCRATIC CURSOR --- */
-        #cursor { position: fixed; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; }
+        #cursor { position: fixed; width: 5px; height: 5px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 10000; }
         #cursor-follower { 
-            position: fixed; width: 40px; height: 40px; border: 0.5px solid var(--gold); 
-            border-radius: 50%; pointer-events: none; z-index: 9998; 
-            transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1); 
+            position: fixed; width: 45px; height: 45px; border: 0.5px solid var(--gold); 
+            border-radius: 50%; pointer-events: none; z-index: 9999; 
+            transition: transform 0.15s cubic-bezier(0.23, 1, 0.32, 1); 
         }
 
-        .container { max-width: 1600px; margin: 0 auto; padding: 0 60px; }
+        /* --- THE KINETIC CONSTELLATION --- */
+        .myth-background {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 0;
+            pointer-events: none;
+        }
 
-        /* --- HERO SECTION --- */
-        .hero {
+        .orbit-container {
+            position: relative;
+            width: 900px;
+            height: 900px;
+            border: 1px solid rgba(197, 160, 89, 0.1);
+            border-radius: 50%;
+            animation: slowRotate 100s linear infinite;
+        }
+
+        @keyframes slowRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .role-tag {
+            position: absolute;
+            top: 50%; left: 50%;
+            font-family: 'Syncopate';
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--gold);
+            text-transform: uppercase;
+            text-shadow: 0 0 20px var(--gold-glow);
+            white-space: nowrap;
+            opacity: 0.7;
+        }
+
+        .center-mark {
+            position: absolute;
+            font-family: 'Instrument Serif';
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            opacity: 0.4;
+        }
+
+        /* --- LAYOUT --- */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            padding: 0 60px;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        header {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            position: relative;
+            background: radial-gradient(circle, transparent 0%, var(--black) 90%);
         }
 
-        .hero h1 {
-            font-family: 'Instrument Serif';
-            font-size: clamp(4rem, 15vw, 12rem);
-            font-weight: 400;
-            font-style: italic;
-            margin: 0;
-            line-height: 0.8;
-            z-index: 2;
-        }
+        .pre-title { font-family: 'Syncopate'; font-size: 0.6rem; letter-spacing: 12px; color: var(--gold); margin-bottom: 20px; }
+        h1 { font-family: 'Instrument Serif'; font-size: clamp(3rem, 15vw, 10rem); font-weight: 400; font-style: italic; margin: 0; line-height: 0.8; }
+        .scroll-hint { margin-top: 40px; font-family: 'Syncopate'; font-size: 0.5rem; letter-spacing: 4px; opacity: 0.4; }
 
-        .gold-label {
-            font-family: 'Syncopate';
-            font-size: 0.7rem;
-            letter-spacing: 12px;
-            color: var(--gold);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        /* --- KINETIC CONSTELLATION --- */
-        .constellation-wrapper {
-            position: absolute;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            opacity: 0.4;
-        }
-
-        .constellation-orbit {
-            position: relative;
-            width: 800px;
-            height: 800px;
-            border: 1px solid rgba(197, 160, 89, 0.1);
-            border-radius: 50%;
-            animation: rotateOrbit 100s linear infinite;
-        }
-
-        @keyframes rotateOrbit {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .role-node {
-            position: absolute;
-            font-family: 'Syncopate';
-            font-size: 0.5rem;
-            letter-spacing: 2px;
-            color: var(--gold);
-            white-space: nowrap;
-            top: 50%; left: 50%;
-        }
-
-        /* Position nodes using negative rotation to keep text upright */
-        .node { position: absolute; }
-        /* CSS loop for placement in production would be JS, here we manual some */
-        .node:nth-child(1) { transform: rotate(0deg) translate(400px) rotate(0deg); }
-        .node:nth-child(2) { transform: rotate(45deg) translate(400px) rotate(-45deg); }
-        .node:nth-child(3) { transform: rotate(90deg) translate(400px) rotate(-90deg); }
-        .node:nth-child(4) { transform: rotate(135deg) translate(400px) rotate(-135deg); }
-        .node:nth-child(5) { transform: rotate(180deg) translate(400px) rotate(-180deg); }
-        .node:nth-child(6) { transform: rotate(225deg) translate(400px) rotate(-225deg); }
-        .node:nth-child(7) { transform: rotate(270deg) translate(400px) rotate(-270deg); }
-        .node:nth-child(8) { transform: rotate(315deg) translate(400px) rotate(-315deg); }
-
-        /* --- CONTENT GRID --- */
         .main-grid {
             display: grid;
-            grid-template-columns: 450px 1fr;
+            grid-template-columns: 480px 1fr;
             gap: 120px;
             padding-bottom: 200px;
         }
 
+        /* --- SIDEBAR FORM --- */
         .sidebar { position: sticky; top: 100px; height: fit-content; }
-
-        .section-title {
-            font-family: 'Instrument Serif';
-            font-size: 3.5rem;
-            font-style: italic;
-            margin-bottom: 40px;
-            border-bottom: 1px solid var(--gold);
-            padding-bottom: 20px;
+        
+        .etch-form {
+            background: var(--glass);
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
         }
 
-        /* --- INPUTS --- */
-        .input-group { margin-bottom: 40px; }
-        label { 
-            display: block; font-family: 'Syncopate'; font-size: 0.55rem; 
-            color: var(--gold-dim); margin-bottom: 15px; letter-spacing: 2px;
-        }
+        .form-title { font-family: 'Syncopate'; font-size: 0.6rem; letter-spacing: 5px; color: var(--gold); margin-bottom: 40px; border-bottom: 1px solid var(--gold); padding-bottom: 10px; }
+
+        .input-group { margin-bottom: 30px; }
+        label { display: block; font-family: 'Syncopate'; font-size: 0.5rem; color: var(--gold); margin-bottom: 10px; letter-spacing: 2px; }
+        
         input, select, textarea {
-            width: 100%; background: transparent; border: none;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding: 15px 0; color: var(--off-white);
-            font-family: 'Inter'; font-weight: 200; font-size: 1.1rem;
-            transition: border 0.3s ease;
+            width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 0; color: var(--white); font-family: 'Inter'; font-weight: 200; font-size: 1rem;
+            transition: 0.4s;
         }
         input:focus, textarea:focus { outline: none; border-color: var(--gold); }
 
-        .etch-button {
-            width: 100%; padding: 25px; background: transparent;
-            border: 1px solid var(--gold); color: var(--gold);
-            font-family: 'Syncopate'; font-size: 0.7rem; letter-spacing: 4px;
-            transition: all 0.4s; margin-bottom: 20px;
+        .btn-etch {
+            width: 100%; padding: 20px; background: var(--gold); color: var(--black);
+            border: none; font-family: 'Syncopate'; font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 3px; margin-top: 20px; transition: 0.4s;
         }
-        .etch-button:hover { background: var(--gold); color: var(--black); }
+        .btn-etch:hover { background: var(--white); }
 
-        .google-btn {
-            width: 100%; padding: 15px; background: var(--glass);
-            border: 1px solid rgba(255,255,255,0.1); color: var(--off-white);
-            font-family: 'Inter'; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 10px;
+        .btn-google {
+            width: 100%; padding: 15px; background: transparent; border: 1px solid rgba(255,255,255,0.1);
+            color: var(--white); font-family: 'Inter'; font-size: 0.7rem; margin-top: 20px;
+            display: flex; align-items: center; justify-content: center; gap: 10px; opacity: 0.6;
         }
 
-        /* --- THE FEED --- */
-        .feed-item {
+        /* --- LEGACY FEED --- */
+        .archive-header { font-family: 'Instrument Serif'; font-size: 4rem; font-style: italic; margin-bottom: 60px; }
+        
+        .entry-card {
             padding: 60px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
             flex-direction: column;
             gap: 20px;
-            animation: fadeIn 1s ease forwards;
+            transition: 0.5s;
         }
+        .entry-card:hover { transform: translateX(10px); }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .entry-meta { font-family: 'Syncopate'; font-size: 0.55rem; color: var(--gold); letter-spacing: 2px; display: flex; justify-content: space-between; }
+        .entry-text { font-family: 'Instrument Serif'; font-size: 2.8rem; font-style: italic; line-height: 1.1; color: var(--white); }
+        .entry-author { font-family: 'Inter'; font-weight: 200; font-size: 0.9rem; opacity: 0.5; letter-spacing: 1px; }
 
-        .meta { font-family: 'Syncopate'; font-size: 0.6rem; color: var(--gold); letter-spacing: 2px; display: flex; justify-content: space-between; }
-        .testimonial { font-family: 'Instrument Serif'; font-size: 2.2rem; line-height: 1.2; font-style: italic; }
-        .author-tag { font-family: 'Inter'; font-weight: 200; opacity: 0.5; font-size: 0.9rem; }
-        
-        .delete-trigger {
-            background: none; border: none; color: #ff4444; 
-            font-family: 'Syncopate'; font-size: 0.5rem; letter-spacing: 1px;
-            cursor: pointer; opacity: 0; transition: opacity 0.3s;
+        .delete-action { 
+            background: none; border: none; color: #ff5555; font-family: 'Syncopate'; 
+            font-size: 0.5rem; letter-spacing: 1px; cursor: pointer; opacity: 0.4;
         }
-        .feed-item:hover .delete-trigger { opacity: 0.6; }
+        .delete-action:hover { opacity: 1; }
 
-        @media (max-width: 1000px) {
+        @media (max-width: 1100px) {
             .main-grid { grid-template-columns: 1fr; }
             .sidebar { position: relative; top: 0; }
+            .orbit-container { width: 600px; height: 600px; }
         }
     </style>
 </head>
@@ -194,162 +186,186 @@
 <div id="cursor"></div>
 <div id="cursor-follower"></div>
 
-<div class="constellation-wrapper">
-    <div class="constellation-orbit" id="orbit">
+<div class="myth-background">
+    <div class="center-mark">ISA 2026</div>
+    <div class="orbit-container" id="orbit">
         </div>
 </div>
 
-<section class="hero">
-    <div class="gold-label">The Collective Myth</div>
-    <h1>ISA Cultural Fest 2026</h1>
-    <p style="font-family: 'Inter'; font-weight: 200; font-size: 0.9rem; letter-spacing: 4px; margin-top: 30px; opacity: 0.6;">ETCHING STUDENT LEGACIES INTO TIME</p>
-    <a href="#registry" style="margin-top: 50px; color: var(--gold); text-decoration: none; font-size: 2rem;">↓</a>
-</section>
+<div class="content-wrapper">
+    <header>
+        <div class="pre-title">ESTABLISHED 2026</div>
+        <h1>A Collective Legacy</h1>
+        <div class="scroll-hint">SCROLL TO WITNESS THE MEMORY</div>
+    </header>
 
-<div class="container" id="registry">
     <div class="main-grid">
         <aside class="sidebar">
-            <h2 class="section-title">The Registry</h2>
-            
-            <div class="input-group">
-                <label>Recipient of Honor</label>
-                <input type="text" id="target" placeholder="Name or Team">
-            </div>
+            <div class="etch-form">
+                <div class="form-title">ETCH A MEMORY</div>
+                
+                <div class="input-group">
+                    <label>Honoring</label>
+                    <input type="text" id="target" placeholder="Recipent Name/Team">
+                </div>
 
-            <div class="input-group">
-                <label>The Scribe</label>
-                <input type="text" id="sender" placeholder="Your Name">
-            </div>
+                <div class="input-group">
+                    <label>From</label>
+                    <input type="text" id="sender" placeholder="Your Name">
+                </div>
 
-            <div class="input-group">
-                <label>Affiliation</label>
-                <select id="dept">
-                    <option>Core Committee</option>
-                    <option>The Creative PR</option>
-                    <option>Technical Arts</option>
-                    <option>Cultural Performer</option>
-                    <option>The Volunteers</option>
-                    <option>Guest / Witness</option>
-                </select>
-            </div>
+                <div class="input-group">
+                    <label>The Sphere of Influence</label>
+                    <select id="dept">
+                        <option>Co-President</option>
+                        <option>Secretary</option>
+                        <option>Finance & Sponsorship</option>
+                        <option>PR Team</option>
+                        <option>HR Coordination</option>
+                        <option>HR Operation</option>
+                        <option>Sound & Light</option>
+                        <option>Activity Team</option>
+                        <option>Booth Hosts</option>
+                        <option>Performers</option>
+                        <option>Helpers</option>
+                        <option>Attendees</option>
+                    </select>
+                </div>
 
-            <div class="input-group">
-                <label>The Testimony</label>
-                <textarea id="text" rows="4" placeholder="Describe the moment..."></textarea>
-            </div>
+                <div class="input-group">
+                    <label>The Testimony</label>
+                    <textarea id="text" rows="5" placeholder="Spill the story of the fest..."></textarea>
+                </div>
 
-            <button class="etch-button" onclick="addEntry()">RECORD INTO HISTORY</button>
-            
-            <button class="google-btn" onclick="googleSignIn()">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="16">
-                Sign in to manage your legacy
-            </button>
-            <p style="font-size: 0.6rem; opacity: 0.4; text-align: center; margin-top: 15px;">Only authenticated scribes may redact their words.</p>
+                <button class="btn-etch" onclick="addEntry()">RECORD INTO HISTORY</button>
+                
+                <button class="btn-google" id="google-trigger" onclick="handleAuth()">
+                    <svg width="14" height="14" viewBox="0 0 18 18"><path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/><path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/><path d="M3.964 10.712c-.18-.54-.282-1.117-.282-1.712s.102-1.173.282-1.712V4.956H.957a8.996 8.996 0 0 0 0 8.088l3.007-2.332z" fill="#FBBC05"/><path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.956L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/></svg>
+                    SIGN IN TO MANAGE POSTS
+                </button>
+            </div>
         </aside>
 
         <main>
-            <input type="text" id="search" onkeyup="filter()" placeholder="Search the archives..." 
-                   style="font-family: 'Instrument Serif'; font-size: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 60px;">
-            <div id="feed"></div>
+            <div class="archive-header">The Archives</div>
+            <div id="feed">
+                </div>
         </main>
     </div>
 </div>
 
 <script>
-    const roles = ["Presidents", "Scribes", "Treasurers", "Architects", "Curators", "Engineers", "Performers", "Witnesses", "Artisans", "Harbingers"];
-    const orbit = document.getElementById('orbit');
-    let currentUser = null; // Mock for Google Auth logic
+    // --- CONSTELLATION ENGINE ---
+    const departments = [
+        "Co-Presidents", "Secretary", "Finance & Sponsorship", 
+        "PR Team", "HR Coordination", "HR Operation", 
+        "Sound & Light", "Activity Team", "Booth Hosts", 
+        "Performers", "Helpers", "Attendees"
+    ];
 
-    // Initialize Kinetic Constellation
-    roles.forEach((role, i) => {
-        const angle = (i / roles.length) * 360;
-        const node = document.createElement('div');
-        node.className = 'role-node';
-        node.style.transform = `rotate(${angle}deg) translate(400px) rotate(-${angle}deg)`;
-        node.innerText = role;
-        orbit.appendChild(node);
+    const orbit = document.getElementById('orbit');
+    const radius = 450; // Distance from center
+
+    departments.forEach((dept, i) => {
+        const angle = (i / departments.length) * (Math.PI * 2);
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
+        
+        const span = document.createElement('span');
+        span.className = 'role-tag';
+        span.innerText = dept;
+        span.style.left = `calc(50% + ${x}px)`;
+        span.style.top = `calc(50% + ${y}px)`;
+        
+        // Counter-rotate text so it stays upright
+        span.style.transform = `translate(-50%, -50%)`;
+        
+        orbit.appendChild(span);
     });
 
-    // Cursor Movement
+    // --- CURSOR LOGIC ---
     const cursor = document.getElementById('cursor');
     const follower = document.getElementById('cursor-follower');
-    document.addEventListener('mousemove', e => {
+
+    document.addEventListener('mousemove', (e) => {
         cursor.style.left = e.clientX + 'px';
         cursor.style.top = e.clientY + 'px';
-        follower.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
+        follower.style.transform = `translate(${e.clientX - 22}px, ${e.clientY - 22}px)`;
     });
 
-    // Storage Logic
-    const storageKey = "isa_aristocrat_2026";
+    // --- DATA & AUTH LOGIC ---
+    const storageKey = "isa_myth_2026_v2";
     let registry = JSON.parse(localStorage.getItem(storageKey)) || [];
+    let authenticatedUser = null;
+
+    function handleAuth() {
+        // Mocking Google Auth Login
+        authenticatedUser = { id: "user_001", name: "Authenticated Scribe" };
+        document.getElementById('google-trigger').innerHTML = "✓ SCRIBE AUTHENTICATED";
+        document.getElementById('google-trigger').style.opacity = "1";
+        document.getElementById('google-trigger').style.borderColor = "var(--gold)";
+        render();
+    }
 
     function addEntry() {
         const target = document.getElementById('target').value.trim();
-        const sender = document.getElementById('sender').value.trim() || "Anonymous";
+        const sender = document.getElementById('sender').value.trim() || "A Witness";
         const dept = document.getElementById('dept').value;
         const text = document.getElementById('text').value.trim();
 
-        if(!target || !text) return alert("A testimony requires both a subject and words.");
+        if(!target || !text) {
+            alert("To etch history, one must provide a name and a story.");
+            return;
+        }
 
-        const entry = { 
-            id: Date.now(), 
-            target, 
-            sender, 
-            dept, 
+        const newEntry = {
+            id: Date.now(),
+            target,
+            sender,
+            dept,
             text,
-            userId: currentUser ? currentUser.uid : null 
+            ownerId: authenticatedUser ? authenticatedUser.id : null
         };
 
-        registry.unshift(entry);
+        registry.unshift(newEntry);
         localStorage.setItem(storageKey, JSON.stringify(registry));
         
+        // Reset Inputs
         document.getElementById('target').value = '';
         document.getElementById('text').value = '';
         render();
     }
 
     function deleteEntry(id) {
-        if(!currentUser) return alert("Only the authenticated Author may redact history.");
-        registry = registry.filter(e => e.id !== id);
+        if(!authenticatedUser) return;
+        registry = registry.filter(entry => entry.id !== id);
         localStorage.setItem(storageKey, JSON.stringify(registry));
         render();
-    }
-
-    function googleSignIn() {
-        // This is a placeholder for actual Google Auth integration
-        alert("Connecting to Google Services...");
-        currentUser = { uid: "mock_user_123", name: "User" };
-        document.querySelector('.google-btn').innerText = "Authenticated as Scribe";
-        render(); // Re-render to show delete buttons if applicable
     }
 
     function render() {
         const feed = document.getElementById('feed');
         feed.innerHTML = '';
+
         registry.forEach(item => {
-            const isOwner = currentUser && item.userId === currentUser.uid;
+            const isOwner = authenticatedUser && item.ownerId === authenticatedUser.id;
             const card = document.createElement('div');
-            card.className = 'feed-item';
+            card.className = 'entry-card';
             card.innerHTML = `
-                <div class="meta">
+                <div class="entry-meta">
                     <span>${item.dept}</span>
-                    ${isOwner ? `<button class="delete-trigger" onclick="deleteEntry(${item.id})">[ REDACT ]</button>` : ''}
+                    ${isOwner ? `<button class="delete-action" onclick="deleteEntry(${item.id})">[ REDACT ]</button>` : ''}
                 </div>
-                <div class="testimonial">"To ${item.target}, ${item.text}"</div>
-                <div class="author-tag">— Etched by ${item.sender}</div>
+                <div class="entry-text">"To ${item.target}, ${item.text}"</div>
+                <div class="entry-author">— By ${item.sender}</div>
             `;
             feed.appendChild(card);
         });
     }
 
-    function filter() {
-        const term = document.getElementById('search').value.toLowerCase();
-        document.querySelectorAll('.feed-item').forEach(item => {
-            item.style.display = item.innerText.toLowerCase().includes(term) ? "flex" : "none";
-        });
-    }
-
+    // Initialize
     render();
 </script>
+
 </body>
 </html>
