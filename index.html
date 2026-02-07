@@ -3,182 +3,40 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>ISA CULTURAL FEST 2026 | THE COLLECTIVE LEGACY</title>
+    <title>ISA CULTURAL FEST 2026 | THE LEGACY</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@200;400&display=swap" rel="stylesheet">
+    
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
     <style>
-        :root {
-            --gold: #C5A059;
-            --gold-glow: rgba(197, 160, 89, 0.5);
-            --black: #080808;
-            --white: #F4F4F4;
-            --glass: rgba(255, 255, 255, 0.03);
-        }
-
+        :root { --gold: #C5A059; --gold-dim: #866d3d; --black: #050505; --off-white: #E8E8E8; --glass: rgba(255, 255, 255, 0.03); }
         * { box-sizing: border-box; cursor: none; }
-        
-        body {
-            margin: 0;
-            background-color: var(--black);
-            color: var(--white);
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* --- ARISTOCRATIC CURSOR --- */
-        #cursor { position: fixed; width: 5px; height: 5px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 10000; }
-        #cursor-follower { 
-            position: fixed; width: 45px; height: 45px; border: 0.5px solid var(--gold); 
-            border-radius: 50%; pointer-events: none; z-index: 9999; 
-            transition: transform 0.15s cubic-bezier(0.23, 1, 0.32, 1); 
-        }
-
-        /* --- THE KINETIC CONSTELLATION --- */
-        .myth-background {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .orbit-container {
-            position: relative;
-            width: 900px;
-            height: 900px;
-            border: 1px solid rgba(197, 160, 89, 0.1);
-            border-radius: 50%;
-            animation: slowRotate 100s linear infinite;
-        }
-
-        @keyframes slowRotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .role-tag {
-            position: absolute;
-            top: 50%; left: 50%;
-            font-family: 'Syncopate';
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 4px;
-            color: var(--gold);
-            text-transform: uppercase;
-            text-shadow: 0 0 20px var(--gold-glow);
-            white-space: nowrap;
-            opacity: 0.7;
-        }
-
-        .center-mark {
-            position: absolute;
-            font-family: 'Instrument Serif';
-            font-style: italic;
-            font-size: 1.2rem;
-            color: var(--gold);
-            letter-spacing: 2px;
-            opacity: 0.4;
-        }
-
-        /* --- LAYOUT --- */
-        .content-wrapper {
-            position: relative;
-            z-index: 10;
-            padding: 0 60px;
-            max-width: 1800px;
-            margin: 0 auto;
-        }
-
-        header {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: radial-gradient(circle, transparent 0%, var(--black) 90%);
-        }
-
-        .pre-title { font-family: 'Syncopate'; font-size: 0.6rem; letter-spacing: 12px; color: var(--gold); margin-bottom: 20px; }
-        h1 { font-family: 'Instrument Serif'; font-size: clamp(3rem, 15vw, 10rem); font-weight: 400; font-style: italic; margin: 0; line-height: 0.8; }
-        .scroll-hint { margin-top: 40px; font-family: 'Syncopate'; font-size: 0.5rem; letter-spacing: 4px; opacity: 0.4; }
-
-        .main-grid {
-            display: grid;
-            grid-template-columns: 480px 1fr;
-            gap: 120px;
-            padding-bottom: 200px;
-        }
-
-        /* --- SIDEBAR FORM --- */
-        .sidebar { position: sticky; top: 100px; height: fit-content; }
-        
-        .etch-form {
-            background: var(--glass);
-            padding: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-        }
-
-        .form-title { font-family: 'Syncopate'; font-size: 0.6rem; letter-spacing: 5px; color: var(--gold); margin-bottom: 40px; border-bottom: 1px solid var(--gold); padding-bottom: 10px; }
-
-        .input-group { margin-bottom: 30px; }
-        label { display: block; font-family: 'Syncopate'; font-size: 0.5rem; color: var(--gold); margin-bottom: 10px; letter-spacing: 2px; }
-        
-        input, select, textarea {
-            width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 12px 0; color: var(--white); font-family: 'Inter'; font-weight: 200; font-size: 1rem;
-            transition: 0.4s;
-        }
-        input:focus, textarea:focus { outline: none; border-color: var(--gold); }
-
-        .btn-etch {
-            width: 100%; padding: 20px; background: var(--gold); color: var(--black);
-            border: none; font-family: 'Syncopate'; font-size: 0.7rem; font-weight: 700;
-            letter-spacing: 3px; margin-top: 20px; transition: 0.4s;
-        }
-        .btn-etch:hover { background: var(--white); }
-
-        .btn-google {
-            width: 100%; padding: 15px; background: transparent; border: 1px solid rgba(255,255,255,0.1);
-            color: var(--white); font-family: 'Inter'; font-size: 0.7rem; margin-top: 20px;
-            display: flex; align-items: center; justify-content: center; gap: 10px; opacity: 0.6;
-        }
-
-        /* --- LEGACY FEED --- */
-        .archive-header { font-family: 'Instrument Serif'; font-size: 4rem; font-style: italic; margin-bottom: 60px; }
-        
-        .entry-card {
-            padding: 60px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            transition: 0.5s;
-        }
-        .entry-card:hover { transform: translateX(10px); }
-
-        .entry-meta { font-family: 'Syncopate'; font-size: 0.55rem; color: var(--gold); letter-spacing: 2px; display: flex; justify-content: space-between; }
-        .entry-text { font-family: 'Instrument Serif'; font-size: 2.8rem; font-style: italic; line-height: 1.1; color: var(--white); }
-        .entry-author { font-family: 'Inter'; font-weight: 200; font-size: 0.9rem; opacity: 0.5; letter-spacing: 1px; }
-
-        .delete-action { 
-            background: none; border: none; color: #ff5555; font-family: 'Syncopate'; 
-            font-size: 0.5rem; letter-spacing: 1px; cursor: pointer; opacity: 0.4;
-        }
-        .delete-action:hover { opacity: 1; }
-
-        @media (max-width: 1100px) {
-            .main-grid { grid-template-columns: 1fr; }
-            .sidebar { position: relative; top: 0; }
-            .orbit-container { width: 600px; height: 600px; }
-        }
+        body { margin: 0; font-family: 'Inter', sans-serif; background-color: var(--black); color: var(--off-white); overflow-x: hidden; scroll-behavior: smooth; }
+        #cursor { position: fixed; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; }
+        #cursor-follower { position: fixed; width: 40px; height: 40px; border: 0.5px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 9998; transition: transform 0.2s; }
+        .container { max-width: 1600px; margin: 0 auto; padding: 0 60px; }
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .hero h1 { font-family: 'Instrument Serif'; font-size: clamp(4rem, 12vw, 10rem); font-style: italic; margin: 0; }
+        .gold-label { font-family: 'Syncopate'; font-size: 0.7rem; letter-spacing: 12px; color: var(--gold); text-transform: uppercase; }
+        .role-showcase { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 100px 60px; background: #080808; }
+        .role-card { border-left: 1px solid var(--gold-dim); padding: 40px 20px; height: 320px; display: flex; flex-direction: column; justify-content: flex-end; transition: 0.5s; opacity: 0.5; }
+        .role-card:hover { opacity: 1; background: var(--glass); border-left: 4px solid var(--gold); transform: translateY(-10px); }
+        .main-grid { display: grid; grid-template-columns: 400px 1fr; gap: 80px; padding: 100px 0; }
+        .sidebar { position: sticky; top: 40px; height: fit-content; }
+        .input-group { margin-bottom: 25px; }
+        label { display: block; font-family: 'Syncopate'; font-size: 0.5rem; color: var(--gold-dim); margin-bottom: 10px; }
+        input, textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 12px 0; color: white; }
+        .etch-button { width: 100%; padding: 20px; background: transparent; border: 1px solid var(--gold); color: var(--gold); font-family: 'Syncopate'; cursor: pointer; }
+        .etch-button:disabled { opacity: 0.3; cursor: not-allowed; }
+        .feed-item { padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .meta { font-family: 'Syncopate'; font-size: 0.55rem; color: var(--gold); display: flex; justify-content: space-between; }
+        .testimonial { font-family: 'Instrument Serif'; font-size: 2rem; font-style: italic; }
+        .delete-btn { background: none; border: none; color: #ff4444; font-size: 0.5rem; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -186,186 +44,92 @@
 <div id="cursor"></div>
 <div id="cursor-follower"></div>
 
-<div class="myth-background">
-    <div class="center-mark">ISA 2026</div>
-    <div class="orbit-container" id="orbit">
-        </div>
-</div>
+<section class="hero">
+    <div class="gold-label">The Collective Myth</div>
+    <h1>ISA Cultural Fest 2026</h1>
+</section>
 
-<div class="content-wrapper">
-    <header>
-        <div class="pre-title">ESTABLISHED 2026</div>
-        <h1>A Collective Legacy</h1>
-        <div class="scroll-hint">SCROLL TO WITNESS THE MEMORY</div>
-    </header>
+<section class="role-showcase" id="role-grid"></section>
 
+<div class="container">
     <div class="main-grid">
         <aside class="sidebar">
-            <div class="etch-form">
-                <div class="form-title">ETCH A MEMORY</div>
-                
-                <div class="input-group">
-                    <label>Honoring</label>
-                    <input type="text" id="target" placeholder="Recipent Name/Team">
-                </div>
-
-                <div class="input-group">
-                    <label>From</label>
-                    <input type="text" id="sender" placeholder="Your Name">
-                </div>
-
-                <div class="input-group">
-                    <label>The Sphere of Influence</label>
-                    <select id="dept">
-                        <option>Co-President</option>
-                        <option>Secretary</option>
-                        <option>Finance & Sponsorship</option>
-                        <option>PR Team</option>
-                        <option>HR Coordination</option>
-                        <option>HR Operation</option>
-                        <option>Sound & Light</option>
-                        <option>Activity Team</option>
-                        <option>Booth Hosts</option>
-                        <option>Performers</option>
-                        <option>Helpers</option>
-                        <option>Attendees</option>
-                    </select>
-                </div>
-
-                <div class="input-group">
-                    <label>The Testimony</label>
-                    <textarea id="text" rows="5" placeholder="Spill the story of the fest..."></textarea>
-                </div>
-
-                <button class="btn-etch" onclick="addEntry()">RECORD INTO HISTORY</button>
-                
-                <button class="btn-google" id="google-trigger" onclick="handleAuth()">
-                    <svg width="14" height="14" viewBox="0 0 18 18"><path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/><path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/><path d="M3.964 10.712c-.18-.54-.282-1.117-.282-1.712s.102-1.173.282-1.712V4.956H.957a8.996 8.996 0 0 0 0 8.088l3.007-2.332z" fill="#FBBC05"/><path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.956L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/></svg>
-                    SIGN IN TO MANAGE POSTS
-                </button>
+            <h2 style="font-family: 'Instrument Serif'; font-style: italic; font-size: 3rem;">The Registry</h2>
+            <div id="g_id_onload"
+                 data-client_id="671163289983-2056vpimutuatgerek6676pr1ob9p1n0.apps.googleusercontent.com"
+                 data-callback="handleCredentialResponse"
+                 data-auto_prompt="false">
             </div>
+            <div class="g_id_signin" data-type="standard"></div>
+            <p id="auth-status" style="font-size: 0.7rem; margin: 15px 0; color: var(--gold-dim);">Sign in to leave your mark.</p>
+            <div class="input-group"><label>Recipient</label><input type="text" id="target"></div>
+            <div class="input-group"><label>Testimony</label><textarea id="text" rows="3"></textarea></div>
+            <button class="etch-button" id="submit-btn" onclick="addEntry()" disabled>RECORD INTO HISTORY</button>
         </aside>
-
         <main>
-            <div class="archive-header">The Archives</div>
-            <div id="feed">
-                </div>
+            <div id="feed"></div>
         </main>
     </div>
 </div>
 
 <script>
-    // --- CONSTELLATION ENGINE ---
-    const departments = [
-        "Co-Presidents", "Secretary", "Finance & Sponsorship", 
-        "PR Team", "HR Coordination", "HR Operation", 
-        "Sound & Light", "Activity Team", "Booth Hosts", 
-        "Performers", "Helpers", "Attendees"
-    ];
+    // --- FIREBASE CONFIG (FROM SCREENSHOT) ---
+    const firebaseConfig = {
+      apiKey: "AIzaSyBfj4i0quFWPTHCdnC8GT3BSEsKvvvqzRA",
+      authDomain: "isa-culturtal-fest-2026.firebaseapp.com",
+      databaseURL: "https://isa-culturtal-fest-2026-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "isa-culturtal-fest-2026",
+      storageBucket: "isa-culturtal-fest-2026.firebasestorage.app",
+      messagingSenderId: "409174792749",
+      appId: "1:409174792749:web:d1ea619c1ea6e31706b6a4",
+      measurementId: "G-H3KJPEJZ2K"
+    };
 
-    const orbit = document.getElementById('orbit');
-    const radius = 450; // Distance from center
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
 
-    departments.forEach((dept, i) => {
-        const angle = (i / departments.length) * (Math.PI * 2);
-        const x = Math.cos(angle) * radius;
-        const y = Math.sin(angle) * radius;
-        
-        const span = document.createElement('span');
-        span.className = 'role-tag';
-        span.innerText = dept;
-        span.style.left = `calc(50% + ${x}px)`;
-        span.style.top = `calc(50% + ${y}px)`;
-        
-        // Counter-rotate text so it stays upright
-        span.style.transform = `translate(-50%, -50%)`;
-        
-        orbit.appendChild(span);
+    // Roles Setup
+    const roles = ["Presidents", "Scribes", "Treasurers", "Architects", "Curators", "Engineers", "Performers", "Witnesses", "Artisans", "Harbingers"];
+    roles.forEach((r, i) => {
+        document.getElementById('role-grid').innerHTML += `<div class="role-card"><div style="font-family: 'Syncopate'; font-size: 0.6rem; color: var(--gold);">0${i+1}</div><div style="font-family: 'Instrument Serif'; font-size: 2.5rem; font-style: italic;">${r}</div></div>`;
     });
 
-    // --- CURSOR LOGIC ---
-    const cursor = document.getElementById('cursor');
-    const follower = document.getElementById('cursor-follower');
-
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-        follower.style.transform = `translate(${e.clientX - 22}px, ${e.clientY - 22}px)`;
+    // Cursor
+    document.addEventListener('mousemove', e => {
+        document.getElementById('cursor').style.left = e.clientX + 'px';
+        document.getElementById('cursor').style.top = e.clientY + 'px';
+        document.getElementById('cursor-follower').style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
     });
 
-    // --- DATA & AUTH LOGIC ---
-    const storageKey = "isa_myth_2026_v2";
-    let registry = JSON.parse(localStorage.getItem(storageKey)) || [];
-    let authenticatedUser = null;
-
-    function handleAuth() {
-        // Mocking Google Auth Login
-        authenticatedUser = { id: "user_001", name: "Authenticated Scribe" };
-        document.getElementById('google-trigger').innerHTML = "✓ SCRIBE AUTHENTICATED";
-        document.getElementById('google-trigger').style.opacity = "1";
-        document.getElementById('google-trigger').style.borderColor = "var(--gold)";
-        render();
+    // Auth
+    let currentUser = null;
+    function handleCredentialResponse(response) {
+        const payload = JSON.parse(atob(response.credential.split('.')[1]));
+        currentUser = { id: payload.sub, name: payload.name };
+        document.getElementById('auth-status').innerText = `Logged in as ${currentUser.name}`;
+        document.getElementById('submit-btn').disabled = false;
     }
 
+    // Database
     function addEntry() {
-        const target = document.getElementById('target').value.trim();
-        const sender = document.getElementById('sender').value.trim() || "A Witness";
-        const dept = document.getElementById('dept').value;
-        const text = document.getElementById('text').value.trim();
-
-        if(!target || !text) {
-            alert("To etch history, one must provide a name and a story.");
-            return;
-        }
-
-        const newEntry = {
-            id: Date.now(),
-            target,
-            sender,
-            dept,
-            text,
-            ownerId: authenticatedUser ? authenticatedUser.id : null
-        };
-
-        registry.unshift(newEntry);
-        localStorage.setItem(storageKey, JSON.stringify(registry));
-        
-        // Reset Inputs
-        document.getElementById('target').value = '';
-        document.getElementById('text').value = '';
-        render();
+        const target = document.getElementById('target').value;
+        const text = document.getElementById('text').value;
+        const newKey = database.ref().child('registry').push().key;
+        database.ref('registry/' + newKey).set({ id: newKey, target, text, author: currentUser.name, authorId: currentUser.id, timestamp: Date.now() });
+        document.getElementById('target').value = ''; document.getElementById('text').value = '';
     }
 
-    function deleteEntry(id) {
-        if(!authenticatedUser) return;
-        registry = registry.filter(entry => entry.id !== id);
-        localStorage.setItem(storageKey, JSON.stringify(registry));
-        render();
-    }
-
-    function render() {
+    database.ref('registry').on('value', (snapshot) => {
         const feed = document.getElementById('feed');
         feed.innerHTML = '';
-
-        registry.forEach(item => {
-            const isOwner = authenticatedUser && item.ownerId === authenticatedUser.id;
-            const card = document.createElement('div');
-            card.className = 'entry-card';
-            card.innerHTML = `
-                <div class="entry-meta">
-                    <span>${item.dept}</span>
-                    ${isOwner ? `<button class="delete-action" onclick="deleteEntry(${item.id})">[ REDACT ]</button>` : ''}
-                </div>
-                <div class="entry-text">"To ${item.target}, ${item.text}"</div>
-                <div class="entry-author">— By ${item.sender}</div>
-            `;
-            feed.appendChild(card);
-        });
-    }
-
-    // Initialize
-    render();
+        const data = snapshot.val();
+        if (data) {
+            Object.values(data).sort((a,b) => b.timestamp - a.timestamp).forEach(item => {
+                const isOwner = currentUser && item.authorId === currentUser.id;
+                feed.innerHTML += `<div class="feed-item"><div class="meta"><span>BY ${item.author}</span>${isOwner ? `<button class="delete-btn" onclick="database.ref('registry/${item.id}').remove()">[ REDACT ]</button>` : ''}</div><div class="testimonial">"To ${item.target}, ${item.text}"</div></div>`;
+            });
+        }
+    });
 </script>
-
 </body>
 </html>
