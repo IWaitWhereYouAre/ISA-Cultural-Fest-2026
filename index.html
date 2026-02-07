@@ -1,905 +1,550 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>ISA CULTURAL FEST 2026 | THE LEGACY</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>ISA Cultural Fest 2026 | The Legacy</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@200;300;400&family=Bodoni+Moda:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@200;300;400&family=Bodoni+Moda:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 
-  <!-- Google One Tap -->
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+:root{
+  /* 🌸 Pastel Royal (light, airy) */
+  --blue: #ECF3FF;
+  --lavender: #F3EEFF;
+  --violet: #ECE6FA;
+  --sky: #FAFBFF;
 
-  <style>
-    :root{
-      /* Royal palette: velvet + bone + foil gold */
-      --gold: #D7B85A;
-      --gold-hi: #F6E7B0;
-      --gold-dim: rgba(215,184,90,.55);
-      --bone: #FBF7EE;
+  --gold: #C9B26D;
+  --gold-soft: rgba(201,178,109,.42);
 
-      --obsidian: #040404;
-      --velvet: #070A09;
-      --velvet-2: #0B100D;
+  --ink: #2A2A3A;
+  --muted: #6B6B85;
 
-      --glass: rgba(255,255,255,.04);
-      --glass-2: rgba(255,255,255,.065);
-      --border: rgba(215,184,90,.18);
-      --border-strong: rgba(215,184,90,.34);
+  --glass: rgba(255,255,255,.72);
+  --glass-2: rgba(255,255,255,.86);
 
-      --ink: rgba(251,247,238,.92);
-      --muted: rgba(251,247,238,.62);
+  --border: rgba(201,178,109,.35);
+  --border-soft: rgba(30,30,60,.10);
 
-      --shadow: 0 22px 60px rgba(0,0,0,.65);
-      --shadow-soft: 0 12px 40px rgba(0,0,0,.45);
+  --radius: 26px;
+  --radius-sm: 18px;
+  --shadow: 0 30px 80px rgba(120,110,160,.20);
+  --shadow-soft: 0 16px 40px rgba(120,110,160,.14);
 
-      --radius: 26px;
-      --radius-sm: 18px;
-      --max: 1120px;
+  --ease: cubic-bezier(.19,1,.22,1);
+}
 
-      --ease: cubic-bezier(.19,1,.22,1);
-    }
+*{ box-sizing:border-box; }
 
-    *{ box-sizing:border-box; }
+html, body{
+  margin:0;
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--ink);
+  background: linear-gradient(
+    180deg,
+    var(--blue) 0%,
+    var(--lavender) 35%,
+    var(--violet) 70%,
+    var(--sky) 100%
+  );
+}
 
-    html, body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: var(--obsidian);
-      color: var(--bone);
-      overflow-x:hidden;
-      scroll-behavior:smooth;
-    }
+body::after{
+  /* subtle paper grain */
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
 
-    /* Reduce motion friendly */
-    @media (prefers-reduced-motion: reduce){
-      html{ scroll-behavior:auto; }
-      .reveal, .hero *{ transition:none !important; animation:none !important; }
-    }
+.container{
+  width:min(1120px, calc(100% - 48px));
+  margin:0 auto;
+}
+@media(max-width:800px){
+  .container{ width:min(1120px, calc(100% - 28px)); }
+}
 
-    /* Luxury background: velvet gradient + marble haze + subtle grain */
-    body::before{
-      content:"";
-      position:fixed; inset:-20%;
-      background:
-        radial-gradient(1200px 800px at 50% 20%, rgba(215,184,90,.14), transparent 60%),
-        radial-gradient(900px 700px at 18% 60%, rgba(215,184,90,.08), transparent 60%),
-        radial-gradient(1000px 700px at 80% 70%, rgba(255,255,255,.05), transparent 62%),
-        linear-gradient(180deg, var(--velvet) 0%, var(--obsidian) 55%, #020202 100%);
-      z-index:-3;
-      filter:saturate(1.05) contrast(1.05);
-    }
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding: 40px 0;
+}
+.hero-label{
+  font-family: Syncopate;
+  font-size:11px;
+  letter-spacing:.5rem;
+  text-transform:uppercase;
+  color: var(--muted);
+  margin: 0 0 22px;
+}
+.hero-title{
+  font-family:"Instrument Serif", serif;
+  font-size:clamp(3.4rem, 12vw, 9rem);
+  font-style:italic;
+  margin:0;
+  line-height:.9;
+  background: linear-gradient(180deg, #E7DBB5, #C9B26D);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.hero-sub{
+  margin:18px auto 0;
+  font-weight:300;
+  max-width:60ch;
+  color: var(--muted);
+  line-height: 1.65;
+}
 
-    body::after{
-      /* subtle grain/noise (CSS only) */
-      content:"";
-      position:fixed; inset:0;
-      background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
-      mix-blend-mode: overlay;
-      opacity:.14;
-      z-index:-2;
-      pointer-events:none;
-    }
+/* REGISTRY */
+.registry{
+  padding:120px 0 80px;
+}
+.card{
+  background: var(--glass);
+  border-radius: var(--radius);
+  border:1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: clamp(28px, 5vw, 72px);
+  backdrop-filter: blur(14px);
+}
+.card h2{
+  font-family:"Bodoni Moda", serif;
+  font-style:italic;
+  font-size:clamp(2rem, 3vw, 3rem);
+  text-align:center;
+  margin:0;
+}
+.card p{
+  text-align:center;
+  color: var(--muted);
+  margin: 14px auto 42px;
+  max-width: 72ch;
+  line-height: 1.6;
+}
 
-    /* Top vignette */
-    .vignette{
-      position:fixed; inset:0;
-      background: radial-gradient(circle at center, transparent 35%, rgba(0,0,0,.65) 100%);
-      z-index:-1;
-      pointer-events:none;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:28px;
+}
+@media(max-width:800px){
+  .grid{ grid-template-columns:1fr; }
+}
+.field{
+  padding:18px 20px;
+  border-radius: var(--radius-sm);
+  background: var(--glass-2);
+  border:1px solid var(--border-soft);
+  box-shadow: var(--shadow-soft);
+}
+.field label{
+  display:block;
+  font-family:Syncopate;
+  font-size:10px;
+  letter-spacing:.3rem;
+  color: var(--muted);
+  margin-bottom:12px;
+  text-transform: uppercase;
+}
+input, select, textarea{
+  width:100%;
+  border:none;
+  background:transparent;
+  border-bottom:1px solid rgba(0,0,0,.18);
+  font-family:Inter;
+  font-size:1rem;
+  padding:8px 2px;
+  outline:none;
+  color: var(--ink);
+}
+textarea{
+  resize:none;
+  min-height:74px;
+  line-height:1.55;
+}
+input:focus, select:focus, textarea:focus{
+  border-bottom-color: var(--gold);
+}
+::placeholder{ color: rgba(42,42,58,.38); }
 
-    /* Prestige cursor: only on fine pointers */
-    @media (pointer:fine){
-      body{ cursor:none; }
-      #cursor, #cursor-follower{ display:block; }
-    }
-    @media (pointer:coarse){
-      #cursor, #cursor-follower{ display:none; }
-      body{ cursor:auto; }
-    }
-    #cursor{
-      position:fixed; width:6px; height:6px;
-      background: var(--gold-hi);
-      border-radius:50%;
-      pointer-events:none; z-index:9999;
-      box-shadow: 0 0 18px rgba(215,184,90,.35);
-      transform: translate(-50%, -50%);
-    }
-    #cursor-follower{
-      position:fixed; width:52px; height:52px;
-      border: 1px solid rgba(215,184,90,.55);
-      border-radius:50%;
-      pointer-events:none; z-index:9998;
-      transform: translate(-50%, -50%);
-      transition: transform .12s var(--ease), width .18s var(--ease), height .18s var(--ease), border-color .18s var(--ease);
-      box-shadow: 0 0 42px rgba(215,184,90,.10) inset;
-    }
-    .cursor-press #cursor-follower{
-      width:44px; height:44px;
-      border-color: rgba(246,231,176,.75);
-    }
+button.primary{
+  width:100%;
+  margin-top:36px;
+  padding:22px;
+  border-radius:999px;
+  border:1px solid var(--gold);
+  background: linear-gradient(180deg, #FFF7DC, #E6D29A);
+  font-family:Syncopate;
+  font-size:11px;
+  letter-spacing:.4rem;
+  cursor:pointer;
+  transition:.4s var(--ease);
+}
+button.primary:hover:not(:disabled){
+  transform:translateY(-2px);
+  box-shadow:0 20px 40px rgba(201,178,109,.30);
+}
+button.primary:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+.status{
+  text-align:center;
+  font-size:11px;
+  letter-spacing:.2rem;
+  color: var(--muted);
+  margin-top:18px;
+  text-transform: uppercase;
+}
 
-    /* Layout */
-    .container{
-      width:min(var(--max), calc(100% - 48px));
-      margin:0 auto;
-    }
+/* FEED */
+.feed{
+  padding:80px 0 120px;
+}
+.feed-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:16px;
+  margin-bottom:24px;
+  flex-wrap: wrap;
+}
+.feed-title{
+  font-family:"Bodoni Moda", serif;
+  font-style: italic;
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  margin:0;
+}
+.searchWrap{
+  flex: 0 1 460px;
+  padding: 14px 18px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.75);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-soft);
+}
+.searchWrap input{
+  border-bottom: none;
+  padding: 6px 10px;
+}
 
-    /* HERO */
-    .hero{
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      text-align:center;
-      position:relative;
-      padding: 110px 0 70px;
-    }
-
-    .crest{
-      position:absolute;
-      top: 28px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 64px; height: 64px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: radial-gradient(circle at 30% 25%, rgba(246,231,176,.20), rgba(255,255,255,.02));
-      box-shadow: var(--shadow-soft);
-      display:grid; place-items:center;
-      backdrop-filter: blur(10px);
-    }
-    .crest::before{
-      content:"✶";
-      font-family: "Bodoni Moda", serif;
-      font-size: 26px;
-      color: var(--gold);
-      opacity:.92;
-      transform: translateY(-1px);
-      text-shadow: 0 0 30px rgba(215,184,90,.22);
-    }
-
-    .hero-label{
-      font-family: Syncopate, sans-serif;
-      font-size: 11px;
-      letter-spacing: .58rem;
-      text-transform: uppercase;
-      color: var(--gold-dim);
-      margin: 0 0 26px;
-      opacity:.95;
-    }
-
-    .hero-title{
-      font-family: "Instrument Serif", serif;
-      font-size: clamp(3.4rem, 12vw, 10rem);
-      font-style: italic;
-      margin:0;
-      line-height: .86;
-      letter-spacing: -2px;
-      background: linear-gradient(180deg, var(--gold-hi), var(--gold) 45%, rgba(215,184,90,.65));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color: transparent;
-      text-shadow: 0 0 55px rgba(215,184,90,.12);
-    }
-
-    .hero-sub{
-      margin-top: 18px;
-      font-family: Inter, sans-serif;
-      font-weight: 200;
-      letter-spacing: .20rem;
-      color: rgba(251,247,238,.70);
-      max-width: 52ch;
-      margin-inline:auto;
-    }
-
-    .hero-divider{
-      margin: 40px auto 0;
-      width: min(560px, 76vw);
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(215,184,90,.35), transparent);
-      opacity:.9;
-    }
-
-    /* Reveal animation */
-    .reveal{
-      opacity:0;
-      transform: translateY(16px);
-      transition: opacity .9s var(--ease), transform .9s var(--ease);
-    }
-    .reveal.in{
-      opacity:1;
-      transform: translateY(0);
-    }
-
-    /* REGISTRY */
-    .registry-section{
-      padding: 120px 0 80px;
-      border-top: 1px solid rgba(215,184,90,.10);
-    }
-
-    .registry-card{
-      border-radius: var(--radius);
-      padding: clamp(28px, 4vw, 78px);
-      background:
-        radial-gradient(800px 420px at 20% 0%, rgba(215,184,90,.10), transparent 55%),
-        radial-gradient(900px 520px at 100% 10%, rgba(255,255,255,.06), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .registry-card::before{
-      /* watermark crest */
-      content:"ISA";
-      position:absolute;
-      right: 18px;
-      bottom: -4px;
-      font-family: "Bodoni Moda", serif;
-      font-style: italic;
-      font-size: clamp(4rem, 10vw, 10rem);
-      color: rgba(215,184,90,.06);
-      letter-spacing: .08em;
-      pointer-events:none;
-      user-select:none;
-    }
-
-    .form-header{
-      font-family:"Bodoni Moda", serif;
-      font-size: clamp(2rem, 3.2vw, 3rem);
-      font-style: italic;
-      margin: 0 0 18px;
-      text-align:center;
-      color: rgba(251,247,238,.95);
-    }
-
-    .form-sub{
-      text-align:center;
-      color: var(--muted);
-      font-weight: 200;
-      letter-spacing: .08em;
-      margin: 0 auto 46px;
-      max-width: 64ch;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-    @media (max-width: 900px){
-      .grid{ grid-template-columns: 1fr; }
-    }
-
-    .field{
-      position:relative;
-      padding: 18px 18px 14px;
-      border-radius: var(--radius-sm);
-      background: rgba(0,0,0,.18);
-      border: 1px solid rgba(215,184,90,.14);
-      transition: border-color .35s var(--ease), background .35s var(--ease), transform .35s var(--ease);
-    }
-    .field:hover{
-      border-color: rgba(215,184,90,.26);
-      background: rgba(0,0,0,.22);
-      transform: translateY(-1px);
-    }
-
-    .field label{
-      display:block;
-      font-family: Syncopate, sans-serif;
-      font-size: 10px;
-      letter-spacing: .30rem;
-      color: rgba(215,184,90,.65);
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    select, input, textarea{
-      width:100%;
-      background: transparent;
-      border: none;
-      outline:none;
-      color: var(--ink);
-      font-family: Inter, sans-serif;
-      font-weight: 200;
-      font-size: 1.05rem;
-      padding: 6px 2px;
-      border-bottom: 1px solid rgba(215,184,90,.18);
-      transition: border-color .35s var(--ease), box-shadow .35s var(--ease);
-    }
-
-    textarea{
-      resize:none;
-      min-height: 76px;
-      line-height: 1.5;
-    }
-
-    select:focus, input:focus, textarea:focus{
-      border-bottom-color: rgba(246,231,176,.9);
-      box-shadow: 0 12px 28px rgba(215,184,90,.08);
-    }
-
-    ::placeholder{ color: rgba(251,247,238,.38); }
-
-    .auth-row{
-      display:flex;
-      justify-content:center;
-      margin: 0 0 24px;
-    }
-
-    .status-line{
-      text-align:center;
-      margin-top: 14px;
-      font-family: Syncopate, sans-serif;
-      font-size: 10px;
-      letter-spacing: .22rem;
-      color: rgba(215,184,90,.55);
-      text-transform: uppercase;
-    }
-
-    /* Button */
-    .submit-btn{
-      width:100%;
-      margin-top: 22px;
-      padding: 22px 18px;
-      border-radius: 999px;
-      border: 1px solid rgba(215,184,90,.55);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.12));
-      color: rgba(246,231,176,.92);
-      font-family: Syncopate, sans-serif;
-      font-size: 11px;
-      letter-spacing: .45rem;
-      text-transform: uppercase;
-      transition: transform .35s var(--ease), box-shadow .35s var(--ease), background .35s var(--ease), color .35s var(--ease);
-      cursor:pointer;
-      position:relative;
-      overflow:hidden;
-    }
-    .submit-btn::after{
-      content:"";
-      position:absolute; inset:0;
-      background: radial-gradient(600px 140px at 50% -20%, rgba(246,231,176,.22), transparent 60%);
-      opacity:.0;
-      transition: opacity .35s var(--ease);
-    }
-    .submit-btn:hover:not(:disabled){
-      transform: translateY(-1px);
-      box-shadow: 0 18px 55px rgba(215,184,90,.12);
-      color: rgba(5,5,5,.95);
-      background: linear-gradient(180deg, rgba(246,231,176,.92), rgba(215,184,90,.86));
-    }
-    .submit-btn:hover:not(:disabled)::after{ opacity:1; }
-    .submit-btn:disabled{
-      opacity:.45;
-      cursor:not-allowed;
-    }
-    .btn-loading{
-      pointer-events:none;
-      opacity:.85;
-      filter:saturate(.9);
-    }
-
-    /* FEED */
-    .feed-wrap{
-      padding: 50px 0 130px;
-      border-top: 1px solid rgba(215,184,90,.10);
-    }
-
-    .feed-head{
-      display:flex;
-      align-items:flex-end;
-      justify-content: space-between;
-      gap: 18px;
-      margin: 0 0 18px;
-    }
-
-    .feed-title{
-      font-family: "Bodoni Moda", serif;
-      font-style: italic;
-      font-size: clamp(1.4rem, 2.6vw, 2.2rem);
-      margin:0;
-    }
-
-    .search{
-      flex: 0 1 420px;
-      padding: 14px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(215,184,90,.18);
-      background: rgba(0,0,0,.18);
-    }
-    .search input{
-      border:none;
-      border-bottom:none;
-      padding: 6px 10px;
-      font-size: 1rem;
-    }
-
-    .feed{
-      margin-top: 18px;
-      display:flex;
-      flex-direction:column;
-      gap: 18px;
-    }
-
-    .feed-item{
-      border-radius: var(--radius);
-      padding: clamp(20px, 3vw, 32px);
-      border: 1px solid rgba(215,184,90,.14);
-      background:
-        radial-gradient(900px 220px at 10% 0%, rgba(215,184,90,.08), transparent 55%),
-        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow: 0 16px 50px rgba(0,0,0,.45);
-      backdrop-filter: blur(10px);
-      position:relative;
-      overflow:hidden;
-      transform: translateY(6px);
-      opacity:0;
-      animation: fadeUp .7s var(--ease) forwards;
-    }
-    @keyframes fadeUp{
-      to{ transform: translateY(0); opacity:1; }
-    }
-    .feed-item::before{
-      content:"";
-      position:absolute; inset:0;
-      border-radius: inherit;
-      background: linear-gradient(90deg, transparent, rgba(246,231,176,.05), transparent);
-      opacity:.0;
-      transition: opacity .35s var(--ease);
-      pointer-events:none;
-    }
-    .feed-item:hover::before{ opacity:1; }
-
-    .meta{
-      font-family: Syncopate, sans-serif;
-      font-size: 10px;
-      letter-spacing: .28rem;
-      color: rgba(215,184,90,.55);
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    .quote{
-      font-family: "Instrument Serif", serif;
-      font-style: italic;
-      font-size: clamp(1.4rem, 3.6vw, 2.8rem);
-      line-height: 1.18;
-      margin: 0 0 14px;
-      color: rgba(251,247,238,.95);
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    .sig{
-      font-family: "Bodoni Moda", serif;
-      font-size: 14px;
-      letter-spacing: .12rem;
-      color: rgba(251,247,238,.62);
-    }
-
-    .actions{
-      margin-top: 18px;
-      display:flex;
-      justify-content:center;
-      gap: 10px;
-    }
-
-    .redact-btn{
-      border: 1px solid rgba(255,68,68,.35);
-      background: rgba(255,68,68,.06);
-      color: rgba(255,140,140,.95);
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-family: Syncopate, sans-serif;
-      font-size: 10px;
-      letter-spacing: .18rem;
-      text-transform: uppercase;
-      cursor:pointer;
-      opacity:.75;
-      transition: opacity .25s var(--ease), transform .25s var(--ease), background .25s var(--ease);
-    }
-    .redact-btn:hover{
-      opacity:1;
-      transform: translateY(-1px);
-      background: rgba(255,68,68,.10);
-    }
-
-    /* Toast */
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom: 22px;
-      transform: translateX(-50%);
-      padding: 12px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(215,184,90,.22);
-      background: rgba(0,0,0,.55);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 12px 40px rgba(0,0,0,.55);
-      color: rgba(251,247,238,.86);
-      font-size: 13px;
-      letter-spacing: .02em;
-      opacity:0;
-      pointer-events:none;
-      transition: opacity .35s var(--ease), transform .35s var(--ease);
-      z-index: 10000;
-    }
-    .toast.show{
-      opacity:1;
-      transform: translateX(-50%) translateY(-6px);
-    }
-
-    /* Small screens spacing */
-    @media (max-width: 520px){
-      .hero-label{ letter-spacing:.32rem; }
-      .submit-btn{ letter-spacing:.28rem; }
-      .feed-head{ flex-direction: column; align-items: stretch; }
-      .search{ width:100%; }
-    }
-  </style>
+.feed-item{
+  background: rgba(255,255,255,.78);
+  border-radius: var(--radius);
+  border:1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 34px;
+  margin-bottom: 22px;
+  text-align:center;
+}
+.meta{
+  font-family:Syncopate;
+  font-size:10px;
+  letter-spacing:.3rem;
+  color: var(--muted);
+  margin-bottom:18px;
+  text-transform: uppercase;
+}
+.quote{
+  font-family:"Instrument Serif", serif;
+  font-size:clamp(1.6rem, 4vw, 2.6rem);
+  font-style:italic;
+  margin: 0 0 18px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.sig{
+  font-family:"Bodoni Moda", serif;
+  letter-spacing:.12rem;
+  color: var(--muted);
+}
+.actions{
+  margin-top: 18px;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+}
+button.redact{
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(205, 85, 85, .35);
+  background: rgba(205, 85, 85, .10);
+  color: #B24C4C;
+  font-family: Syncopate;
+  font-size: 10px;
+  letter-spacing: .18rem;
+  cursor: pointer;
+  transition: .3s var(--ease);
+}
+button.redact:hover{
+  transform: translateY(-1px);
+  background: rgba(205, 85, 85, .14);
+}
+.smallNote{
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align:center;
+}
+</style>
 </head>
 
 <body>
-  <div class="vignette"></div>
 
-  <!-- Cursor -->
-  <div id="cursor" aria-hidden="true"></div>
-  <div id="cursor-follower" aria-hidden="true"></div>
+<section class="hero">
+  <div class="container">
+    <div class="hero-label">The Sovereign Estate of</div>
+    <h1 class="hero-title">ISA Cultural Fest</h1>
+    <p class="hero-sub">A pastel archive of gratitude — refined, gentle, and preserved as legacy.</p>
+    <div class="hero-label" style="margin-top:34px;">MMXXVI Chronicles</div>
+  </div>
+</section>
 
-  <section class="hero">
-    <div class="crest" aria-hidden="true"></div>
+<section class="registry">
+  <div class="container">
+    <div class="card">
+      <h2>The Imperial Registry</h2>
+      <p>
+        Authenticate to leave a testimony. Your name will <b>not</b> be shown unless you type a signature.
+        Only the author may delete their own entry.
+      </p>
 
-    <div class="container">
-      <p class="hero-label reveal">The Sovereign Estate of</p>
-      <h1 class="hero-title reveal">ISA Cultural Fest</h1>
-      <p class="hero-sub reveal">A living archive of gratitude — sealed by identity, written with dignity, preserved as legacy.</p>
-      <div class="hero-divider reveal"></div>
-      <p class="hero-label reveal" style="margin-top:34px; letter-spacing:.36rem;">MMXXVI Chronicles</p>
+      <div id="g_id_onload"
+        data-client_id="671163289983-2056vpimutuatgerek6676pr1ob9p1n0.apps.googleusercontent.com"
+        data-callback="handleCredentialResponse"
+        data-auto_prompt="false"></div>
+
+      <div class="g_id_signin" style="display:flex;justify-content:center;margin-bottom:36px;"></div>
+
+      <div class="grid">
+        <div class="field">
+          <label for="from">Origin Department</label>
+          <select id="from"></select>
+        </div>
+
+        <div class="field">
+          <label for="to">Destined Department</label>
+          <select id="to"></select>
+        </div>
+
+        <div class="field">
+          <label for="recipient">The Recipient</label>
+          <input id="recipient" placeholder="Name of the distinguished..." autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label for="signature">Signature (optional)</label>
+          <input id="signature" placeholder="Leave blank to remain unnamed" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label for="search">Archive Search</label>
+          <input id="search" placeholder="Recall a memory..." autocomplete="off" />
+        </div>
+
+        <div class="field" style="grid-column:1/-1;">
+          <label for="msg">The Testimony</label>
+          <textarea id="msg" placeholder="Compose your legacy..."></textarea>
+        </div>
+      </div>
+
+      <button class="primary" id="submit" disabled>ETCH INTO HISTORY</button>
+      <div id="status" class="status">Authentication required</div>
+      <div class="smallNote">Tip: If you want privacy, leave “Signature” blank.</div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="registry-section">
-    <div class="container">
-      <div class="registry-card reveal">
-        <h2 class="form-header">The Imperial Registry</h2>
-        <p class="form-sub">Authenticate to etch a testimony. Entries appear publicly; only the author may redact their own record.</p>
-
-        <!-- Google One Tap -->
-        <div id="g_id_onload"
-          data-client_id="671163289983-2056vpimutuatgerek6676pr1ob9p1n0.apps.googleusercontent.com"
-          data-callback="handleCredentialResponse"
-          data-auto_prompt="false">
-        </div>
-
-        <div class="auth-row">
-          <div class="g_id_signin" data-type="standard"></div>
-        </div>
-
-        <div class="grid">
-          <div class="field">
-            <label for="from-dept">Origin Department</label>
-            <select id="from-dept"></select>
-          </div>
-
-          <div class="field">
-            <label for="to-dept">Destined Department</label>
-            <select id="to-dept"></select>
-          </div>
-
-          <div class="field">
-            <label for="target-name">The Recipient</label>
-            <input id="target-name" type="text" placeholder="Name of the distinguished..." autocomplete="off" />
-          </div>
-
-          <div class="field search">
-            <label for="search">Archive Search</label>
-            <input id="search" type="text" placeholder="Recall a memory..." autocomplete="off" />
-          </div>
-
-          <div class="field" style="grid-column: 1 / -1;">
-            <label for="message-text">The Testimony</label>
-            <textarea id="message-text" rows="2" placeholder="Compose your legacy..."></textarea>
-          </div>
-        </div>
-
-        <button class="submit-btn" id="submit-btn" disabled>ETCH INTO HISTORY</button>
-        <div id="auth-status" class="status-line">Authentication required to access registry</div>
+<section class="feed">
+  <div class="container">
+    <div class="feed-head">
+      <h3 class="feed-title">The Gallery of Testimonies</h3>
+      <div class="searchWrap">
+        <input id="search2" placeholder="Search the archive..." autocomplete="off" />
       </div>
     </div>
-  </section>
+    <div id="feed"></div>
+  </div>
+</section>
 
-  <section class="feed-wrap">
-    <div class="container">
-      <div class="feed-head">
-        <h3 class="feed-title reveal">The Gallery of Testimonies</h3>
-      </div>
-      <div id="feed" class="feed"></div>
-    </div>
-  </section>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script>
+/* =========================
+   Firebase
+========================= */
+firebase.initializeApp({
+  apiKey: "AIzaSyBfj4i0quFWPTHCdnC8GT3BSEsKvvvqzRA",
+  authDomain: "isa-culturtal-fest-2026.firebaseapp.com",
+  databaseURL: "https://isa-culturtal-fest-2026-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "isa-culturtal-fest-2026"
+});
+const db = firebase.database();
 
-  <!-- Firebase compat -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+/* =========================
+   Roles
+========================= */
+const roles = [
+  "PR", "Finance (Sponsorship)", "Co-Presidents", "Helpers",
+  "Activity Booth Hosts", "Activity Performers", "Activity Team",
+  "HR Coordination", "HR Operation", "Secretary",
+  "Lighting & Sound Crew", "Attendees", "Core Council", "Ambassadors"
+];
+roles.forEach(r => {
+  document.getElementById("from").add(new Option(r, r));
+  document.getElementById("to").add(new Option(r, r));
+});
 
-  <script>
-    // =========================
-    // Firebase Config
-    // =========================
-    const firebaseConfig = {
-      apiKey: "AIzaSyBfj4i0quFWPTHCdnC8GT3BSEsKvvvqzRA",
-      authDomain: "isa-culturtal-fest-2026.firebaseapp.com",
-      databaseURL: "https://isa-culturtal-fest-2026-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "isa-culturtal-fest-2026",
-      storageBucket: "isa-culturtal-fest-2026.firebasestorage.app",
-      messagingSenderId: "409174792749",
-      appId: "1:409174792749:web:d1ea619c1ea6e31706b6a4",
-      measurementId: "G-H3KJPEJZ2K"
-    };
+/* =========================
+   Auth (for delete ownership)
+   Note: this is UI-level ownership based on Google One Tap "sub".
+========================= */
+let currentUser = null;
 
-    firebase.initializeApp(firebaseConfig);
-    const database = firebase.database();
+function decodeJwt(token){
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g,'+').replace(/_/g,'/');
+  return JSON.parse(atob(base64));
+}
+function handleCredentialResponse(response){
+  const payload = decodeJwt(response.credential);
+  currentUser = { id: payload.sub };
+  document.getElementById("status").textContent = "Authenticated. You may etch an entry.";
+  document.getElementById("submit").disabled = false;
+}
 
-    // =========================
-    // Roles
-    // =========================
-    const roles = [
-      "PR", "Finance (Sponsorship)", "Co-Presidents", "Helpers",
-      "Activity Booth Hosts", "Activity Performers", "Activity Team",
-      "HR Coordination", "HR Operation", "Secretary",
-      "Lighting & Sound Crew", "Attendees", "Core Council", "Ambassadors"
-    ];
+/* =========================
+   Safer rendering helpers
+========================= */
+const feedEl = document.getElementById("feed");
+function el(tag, cls, text){
+  const node = document.createElement(tag);
+  if(cls) node.className = cls;
+  if(text !== undefined) node.textContent = text;
+  return node;
+}
 
-    const fromSelect = document.getElementById("from-dept");
-    const toSelect = document.getElementById("to-dept");
-    roles.forEach(role => {
-      fromSelect.add(new Option(role, role));
-      toSelect.add(new Option(role, role));
-    });
+function redact(id){
+  if(!currentUser) return;
+  const ok = confirm("Delete this entry from the archive?");
+  if(!ok) return;
+  db.ref("registry/" + id).remove();
+}
 
-    // =========================
-    // Cursor (fine pointer only)
-    // =========================
-    const cursor = document.getElementById("cursor");
-    const follower = document.getElementById("cursor-follower");
-    let cursorX = 0, cursorY = 0;
+function renderFeedItem(item){
+  const wrap = el("div", "feed-item");
 
-    document.addEventListener("mousemove", (e) => {
-      cursorX = e.clientX; cursorY = e.clientY;
-      cursor.style.left = cursorX + "px";
-      cursor.style.top = cursorY + "px";
-      follower.style.left = cursorX + "px";
-      follower.style.top = cursorY + "px";
-    });
+  const meta = el("div", "meta", `${(item.fromDept||"").toUpperCase()} → ${(item.toDept||"").toUpperCase()}`);
+  const quote = el("div", "quote", `"${item.message || ""}"`);
 
-    document.addEventListener("mousedown", () => document.body.classList.add("cursor-press"));
-    document.addEventListener("mouseup", () => document.body.classList.remove("cursor-press"));
+  const sigText = item.signature
+    ? `For ${item.targetName || ""} — ${item.signature}`
+    : `For ${item.targetName || ""}`;
 
-    // =========================
-    // Reveal on load/scroll
-    // =========================
-    const revealEls = document.querySelectorAll(".reveal");
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(ent => {
-        if(ent.isIntersecting) ent.target.classList.add("in");
-      });
-    }, { threshold: 0.12 });
-    revealEls.forEach(el => io.observe(el));
-    // Also reveal above-the-fold immediately
-    requestAnimationFrame(() => revealEls.forEach(el => el.classList.add("in")));
+  const sig = el("div", "sig", sigText);
 
-    // =========================
-    // Toast helper
-    // =========================
-    const toastEl = document.getElementById("toast");
-    let toastTimer = null;
-    function toast(msg){
-      toastEl.textContent = msg;
-      toastEl.classList.add("show");
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toastEl.classList.remove("show"), 2400);
-    }
+  wrap.appendChild(meta);
+  wrap.appendChild(quote);
+  wrap.appendChild(sig);
 
-    // =========================
-    // Google One Tap Decode
-    // =========================
-    let currentUser = null;
+  const isOwner = currentUser && item.authorId === currentUser.id;
+  if(isOwner){
+    const actions = el("div", "actions");
+    const btn = el("button", "redact", "DELETE ENTRY");
+    btn.addEventListener("click", () => redact(item.id));
+    actions.appendChild(btn);
+    wrap.appendChild(actions);
+  }
 
-    function decodeJwtResponse(token) {
-      const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      return JSON.parse(window.atob(base64));
-    }
+  return wrap;
+}
 
-    function handleCredentialResponse(response) {
-      const payload = decodeJwtResponse(response.credential);
-      currentUser = { id: payload.sub, name: payload.name };
-      document.getElementById("auth-status").textContent = `Recognized: ${currentUser.name}`;
-      document.getElementById("submit-btn").disabled = false;
-      toast("Authenticated. You may etch an entry.");
-    }
+/* =========================
+   Create entry
+========================= */
+let lastSubmitAt = 0;
 
-    // =========================
-    // UX improvements
-    // =========================
-    const msg = document.getElementById("message-text");
-    msg.addEventListener("input", () => {
-      // auto-grow textarea
-      msg.style.height = "auto";
-      msg.style.height = Math.min(msg.scrollHeight, 220) + "px";
-    });
+document.getElementById("submit").addEventListener("click", () => {
+  if(!currentUser) return;
 
-    // Search filter (no inline onkeyup)
-    document.getElementById("search").addEventListener("input", filter);
+  const targetName = document.getElementById("recipient").value.trim();
+  const message = document.getElementById("msg").value.trim();
+  const signature = document.getElementById("signature").value.trim();
 
-    // Submit handler
-    const submitBtn = document.getElementById("submit-btn");
-    submitBtn.addEventListener("click", addEntry);
+  if(!targetName || !message) return;
 
-    // Prevent double submit spam (basic client-side)
-    let lastSubmitAt = 0;
+  const now = Date.now();
+  if(now - lastSubmitAt < 1200) return;
+  lastSubmitAt = now;
 
-    function setLoading(isLoading){
-      if(isLoading){
-        submitBtn.classList.add("btn-loading");
-        submitBtn.textContent = "ETCHING…";
-        submitBtn.disabled = true;
-      }else{
-        submitBtn.classList.remove("btn-loading");
-        submitBtn.textContent = "ETCH INTO HISTORY";
-        submitBtn.disabled = !currentUser;
-      }
-    }
+  const newKey = db.ref().child("registry").push().key;
 
-    // =========================
-    // Database: safer DOM rendering (no innerHTML with user content)
-    // =========================
-    const feedEl = document.getElementById("feed");
+  db.ref("registry/" + newKey).set({
+    id: newKey,
+    targetName,
+    fromDept: document.getElementById("from").value,
+    toDept: document.getElementById("to").value,
+    message,
+    signature: signature ? signature : null,   // ✅ only stored if typed
+    authorId: currentUser.id,                  // ✅ used to show delete only to owner
+    timestamp: Date.now()
+  });
 
-    function makeFeedItem(item){
-      const wrap = document.createElement("div");
-      wrap.className = "feed-item";
+  document.getElementById("recipient").value = "";
+  document.getElementById("msg").value = "";
+  document.getElementById("signature").value = "";
+});
 
-      const meta = document.createElement("div");
-      meta.className = "meta";
-      meta.textContent = `${(item.fromDept || "").toUpperCase()}  //  TO  //  ${(item.toDept || "").toUpperCase()}`;
+/* =========================
+   Live feed + filtering
+========================= */
+let cachedItems = [];
 
-      const quote = document.createElement("div");
-      quote.className = "quote";
-      quote.textContent = `"${item.message || ""}"`;
+db.ref("registry").on("value", (snapshot) => {
+  const data = snapshot.val();
+  cachedItems = data ? Object.values(data).sort((a,b) => (b.timestamp||0) - (a.timestamp||0)) : [];
+  paint();
+});
 
-      const sig = document.createElement("div");
-      sig.className = "sig";
-      sig.textContent = `For ${item.targetName || ""} — Sincerely, ${item.author || ""}`;
+function paint(){
+  feedEl.innerHTML = "";
+  const term = (document.getElementById("search2").value || "").toLowerCase().trim();
 
-      wrap.appendChild(meta);
-      wrap.appendChild(quote);
-      wrap.appendChild(sig);
+  const items = term
+    ? cachedItems.filter(i => (JSON.stringify(i).toLowerCase().includes(term)))
+    : cachedItems;
 
-      const isOwner = currentUser && item.authorId === currentUser.id;
-      if(isOwner){
-        const actions = document.createElement("div");
-        actions.className = "actions";
-        const btn = document.createElement("button");
-        btn.className = "redact-btn";
-        btn.textContent = "REDACT ENTRY";
-        btn.addEventListener("click", () => redact(item.id));
-        actions.appendChild(btn);
-        wrap.appendChild(actions);
-      }
+  if(items.length === 0){
+    const empty = el("div","feed-item");
+    empty.appendChild(el("div","meta","ARCHIVE STATUS"));
+    empty.appendChild(el("div","quote","\"No matching entries.\""));
+    empty.appendChild(el("div","sig","Try a different search phrase."));
+    feedEl.appendChild(empty);
+    return;
+  }
 
-      return wrap;
-    }
+  items.forEach(item => feedEl.appendChild(renderFeedItem(item)));
+}
 
-    // Read & render live
-    database.ref("registry").on("value", (snapshot) => {
-      const data = snapshot.val();
-      feedEl.innerHTML = "";
+document.getElementById("search2").addEventListener("input", paint);
+document.getElementById("search").addEventListener("input", (e) => {
+  document.getElementById("search2").value = e.target.value;
+  paint();
+});
+</script>
 
-      if(!data){
-        const empty = document.createElement("div");
-        empty.className = "feed-item";
-        empty.style.animation = "none";
-        empty.style.opacity = "1";
-        empty.style.transform = "none";
-        empty.innerHTML = `
-          <div class="meta">ARCHIVE STATUS</div>
-          <div class="quote">"No entries yet."</div>
-          <div class="sig">Be the first to etch a testimony.</div>
-        `;
-        feedEl.appendChild(empty);
-        filter();
-        return;
-      }
-
-      const items = Object.values(data).sort((a,b) => (b.timestamp||0) - (a.timestamp||0));
-      items.forEach((item, idx) => {
-        const node = makeFeedItem(item);
-        node.style.animationDelay = Math.min(idx * 40, 240) + "ms";
-        feedEl.appendChild(node);
-      });
-
-      filter();
-    });
-
-    function addEntry(){
-      const now = Date.now();
-      if(now - lastSubmitAt < 1200){
-        toast("Slow down — let the ink dry.");
-        return;
-      }
-
-      const targetName = document.getElementById("target-name").value.trim();
-      const fromDept = fromSelect.value;
-      const toDept = toSelect.value;
-      const message = msg.value.trim();
-
-      if(!currentUser){
-        toast("Please authenticate first.");
-        return;
-      }
-      if(!targetName){
-        toast("Add the recipient name.");
-        return;
-      }
-      if(!message){
-        toast("Write the testimony.");
-        return;
-      }
-
-      lastSubmitAt = now;
-      setLoading(true);
-
-      const newKey = database.ref().child("registry").push().key;
-      database.ref("registry/" + newKey).set({
-        id: newKey,
-        targetName,
-        fromDept,
-        toDept,
-        message,
-        author: currentUser.name,
-        authorId: currentUser.id,
-        timestamp: Date.now()
-      }).then(() => {
-        document.getElementById("target-name").value = "";
-        msg.value = "";
-        msg.style.height = "auto";
-        toast("Entry etched.");
-      }).catch(() => {
-        toast("Failed to etch. Try again.");
-      }).finally(() => {
-        setLoading(false);
-      });
-    }
-
-    function redact(id){
-      if(!currentUser){
-        toast("Authenticate to redact your entries.");
-        return;
-      }
-      const ok = confirm("Do you wish to strike this from the eternal record?");
-      if(!ok) return;
-
-      database.ref("registry/" + id).remove()
-        .then(() => toast("Entry redacted."))
-        .catch(() => toast("Redaction failed."));
-    }
-
-    function filter(){
-      const term = document.getElementById("search").value.toLowerCase();
-      const nodes = feedEl.querySelectorAll(".feed-item");
-      nodes.forEach(node => {
-        node.style.display = node.innerText.toLowerCase().includes(term) ? "block" : "none";
-      });
-    }
-  </script>
 </body>
 </html>
