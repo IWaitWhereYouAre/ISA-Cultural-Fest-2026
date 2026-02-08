@@ -23,8 +23,6 @@
 
         body, html {
             margin: 0;
-            background-color: var(--silk-ivory);
-            /* Iridescent Silk Gradient */
             background: linear-gradient(120deg, #fdfcf0 0%, #eef2f3 25%, #fcf0f0 50%, #f0f4fd 75%, #fdfcf0 100%);
             background-size: 400% 400%;
             animation: silkFlow 20s ease-in-out infinite;
@@ -34,7 +32,6 @@
             width: 100%;
         }
 
-        /* Canvas Texture Overlay */
         body::before {
             content: "";
             position: fixed;
@@ -51,7 +48,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* --- HERO SECTION --- */
         .hero-section {
             height: 100dvh;
             display: flex;
@@ -76,7 +72,6 @@
             letter-spacing: -0.02em;
         }
 
-        /* --- LAYOUT GRID --- */
         .museum-container {
             display: grid;
             grid-template-columns: 460px 1fr;
@@ -90,19 +85,16 @@
             .museum-container { grid-template-columns: 1fr; }
         }
 
-        /* Aristocratic Glass UI */
         .scribe-desk {
             padding: 80px 60px;
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(25px) saturate(120%);
             -webkit-backdrop-filter: blur(25px);
             border-right: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 20px 0 50px rgba(0,0,0,0.02);
             display: flex;
             flex-direction: column;
         }
 
-        /* Chiaroscuro Forms */
         input, select, textarea {
             width: 100%;
             border: none;
@@ -112,13 +104,12 @@
             font-size: 1.2rem;
             color: var(--obsidian);
             padding: 12px 0;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             outline: none;
-            text-shadow: 0 0 1px rgba(0,0,0,0.1);
             transition: var(--transition-fluid);
         }
 
-        input:focus { padding-left: 15px; letter-spacing: 1px; }
+        input:focus { padding-left: 15px; }
 
         button.primary {
             background: var(--obsidian);
@@ -139,7 +130,6 @@
             border-color: var(--gold-leaf);
         }
 
-        /* --- FEED --- */
         .artwork {
             padding: 40px 0;
             border-bottom: 1px solid rgba(0,0,0,0.05);
@@ -147,17 +137,17 @@
         }
         .artwork:hover { transform: translateX(10px); }
         .quote { font-size: 2rem; font-style: italic; line-height: 1.4; margin-bottom: 10px; opacity: 0.9; }
-        .sig { font-family: 'Montserrat'; font-size: 10px; color: var(--gold-leaf); letter-spacing: 3px; }
-
+        .sig { font-family: 'Montserrat'; font-size: 10px; color: var(--gold-leaf); letter-spacing: 3px; line-height: 1.8; }
+        .label-heading { font-family:Cinzel; font-size:10px; letter-spacing:3px; color:var(--gold-leaf); margin-bottom:10px; }
     </style>
 </head>
 
 <body>
 
     <section class="hero-section">
-        <div style="font-family:Cinzel; font-size:12px; letter-spacing:10px; color:var(--gold-leaf); margin-bottom:20px;">THE COLLECTIVE MYTH</div>
+        <div style="font-family:Cinzel; font-size:12px; letter-spacing:10px; color:var(--gold-leaf); margin-bottom:20px;">THE COLLECTIVE ARCHIVE</div>
         <h1>ISA Cultural Fest 2026</h1>
-        <div style="font-family:Montserrat; font-size:9px; letter-spacing:6px; margin-top:30px; opacity:0.6;">ETCHING STUDENT LEGACIES INTO TIME</div>
+        <div style="font-family:Montserrat; font-size:9px; letter-spacing:6px; margin-top:30px; opacity:0.6;">One of Chulalongkorn University’s largest international events, built and led entirely by students.</div>
         
         <div style="margin-top: 60px; cursor:pointer;" onclick="document.getElementById('registry-start').scrollIntoView({behavior:'smooth'})">
             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--obsidian)" stroke-width="1">
@@ -173,12 +163,21 @@
             <div id="auth-ui" style="margin-bottom: 40px;">
                 <div id="g_id_onload" data-client_id="671163289983-2056vpimutuatgerek6676pr1ob9p1n0.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
                 <div class="g_id_signin" id="google-btn"></div>
-                <button id="signout-btn" class="primary" style="display:none; padding:10px; letter-spacing:2px; font-size:8px;">REVOKE SCRIBE STATUS</button>
+                <button id="signout-btn" class="primary" style="display:none; padding:10px; letter-spacing:2px; font-size:8px; width: auto;">REVOKE SCRIBE STATUS</button>
             </div>
 
-            <input id="recipient" placeholder="Recipient" />
-            <input id="signature" placeholder="The Scribe" />
-            <select id="from"></select>
+            <div class="label-heading">FROM</div>
+            <input id="signature" placeholder="Your Name (The Scribe)" />
+            <select id="senderRole"></select>
+            <input id="senderRoleCustom" placeholder="Define your role..." style="display:none;" />
+
+            <div style="margin: 10px 0; border-top: 1px double var(--gold-leaf); opacity: 0.2;"></div>
+
+            <div class="label-heading">TO</div>
+            <input id="recipient" placeholder="Recipient Name or Team" />
+            <select id="receiverRole"></select>
+            <input id="receiverRoleCustom" placeholder="Define their role..." style="display:none;" />
+
             <textarea id="msg" style="min-height: 120px;" placeholder="The Testimony..."></textarea>
 
             <button class="primary" id="submit" disabled>RECORD INTO HISTORY</button>
@@ -187,7 +186,7 @@
 
         <main style="padding: 80px;">
             <header style="margin-bottom: 60px;">
-                <input id="search2" style="font-size: 1.5rem;" placeholder="Search the archives..." />
+                <input id="search" style="font-size: 1.5rem;" placeholder="Search names, departments, or keywords..." />
             </header>
             <div id="feed"></div>
         </main>
@@ -197,7 +196,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
 <script>
-// --- FIREBASE SETUP ---
+// --- FIREBASE CONFIG ---
 firebase.initializeApp({
     apiKey: "AIzaSyBfj4i0quFWPTHCdnC8GT3BSEsKvvvqzRA",
     authDomain: "isa-culturtal-fest-2026.firebaseapp.com",
@@ -206,27 +205,23 @@ firebase.initializeApp({
 });
 const db = firebase.database();
 
-// --- CHIAROSCURO LIGHT EFFECT ---
-const light = document.createElement('div');
-light.style.cssText = `
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background: radial-gradient(circle 400px at var(--x, 50%) var(--y, 50%), transparent 0%, rgba(253,252,240,0.4) 100%);
-    pointer-events: none;
-    z-index: 2;
-`;
-document.body.appendChild(light);
-
-window.addEventListener('mousemove', e => {
-    light.style.setProperty('--x', e.clientX + 'px');
-    light.style.setProperty('--y', e.clientY + 'px');
-});
-
-// --- LOGIC & AUTH ---
+// --- STATE & ROLES ---
 let currentUser = JSON.parse(localStorage.getItem("scribe_user"));
-const roles = ["Core Committee", "PR", "Finance", "Co-Presidents", "Helpers", "Activity Team", "HR", "Ambassadors", "Attendees"];
-roles.forEach(r => document.getElementById("from").add(new Option(r, r)));
+const roles = ["Co-Presidents", "Core Team", "Secretary Team", "ISA Cultural Fest Team", "SGCU Members", "Finance & Sponsorship", "Public Relations", "HR Coordination", "HR Operations", "Activity Team", "Booth Hosts", "Performers", "Lighting, Color & Sound Crew", "Helpers", "Embassy Honorary Guests", "Attendees", "Other (type your own)"];
+
+// --- UI INITIALIZATION ---
+const senderSelect = document.getElementById("senderRole");
+const receiverSelect = document.getElementById("receiverRole");
+
+function setupRoleSelect(selectEl, customEl) {
+    roles.forEach(r => selectEl.add(new Option(r, r)));
+    selectEl.addEventListener("change", () => {
+        customEl.style.display = selectEl.value === "Other (type your own)" ? "block" : "none";
+    });
+}
+
+setupRoleSelect(senderSelect, document.getElementById("senderRoleCustom"));
+setupRoleSelect(receiverSelect, document.getElementById("receiverRoleCustom"));
 
 function handleCredentialResponse(response){
     const payload = JSON.parse(atob(response.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));
@@ -242,36 +237,78 @@ function updateAuthUI(isLoggedIn) {
     document.getElementById("status").textContent = isLoggedIn ? "SCRIBE RECOGNIZED" : "AUTHENTICATION REQUIRED";
 }
 
-document.getElementById("signout-btn").onclick = () => { localStorage.clear(); location.reload(); };
+document.getElementById("signout-btn").onclick = () => { 
+    localStorage.clear(); 
+    location.reload(); 
+};
+
 if(currentUser) updateAuthUI(true);
 
-// --- DB INTERACTION ---
+// --- SUBMISSION LOGIC ---
 document.getElementById("submit").onclick = function() {
+    const signature = document.getElementById("signature").value;
+    const senderRole = senderSelect.value === "Other (type your own)" ? document.getElementById("senderRoleCustom").value : senderSelect.value;
+    
     const targetName = document.getElementById("recipient").value;
+    const receiverRole = receiverSelect.value === "Other (type your own)" ? document.getElementById("receiverRoleCustom").value : receiverSelect.value;
+    
     const message = document.getElementById("msg").value;
-    if(!targetName || !message) return;
-    this.disabled = true; this.innerText = "ETCHING...";
+    
+    if(!signature || !targetName || !message || !senderRole || !receiverRole) {
+        alert("The archive requires complete testimonies (Names and Roles for both).");
+        return;
+    }
+
+    this.disabled = true; 
+    this.innerText = "ETCHING...";
     
     const newKey = db.ref().child("registry").push().key;
     db.ref("registry/" + newKey).set({
-        id: newKey, targetName, fromDept: document.getElementById("from").value,
-        message, signature: document.getElementById("signature").value || 'Anonymous',
-        authorId: currentUser.id, timestamp: Date.now()
+        id: newKey, 
+        signature: signature,
+        senderRole: senderRole,
+        targetName: targetName, 
+        receiverRole: receiverRole,
+        message: message, 
+        authorId: currentUser.id, 
+        timestamp: Date.now()
     }).then(() => {
         document.getElementById("msg").value = "";
-        this.disabled = false; this.innerText = "RECORD INTO HISTORY";
+        document.getElementById("recipient").value = "";
+        this.disabled = false; 
+        this.innerText = "RECORD INTO HISTORY";
     });
 };
 
+// --- DATA STREAM & RENDER ---
 db.ref("registry").on("value", snap => {
     const feed = document.getElementById("feed");
     const items = snap.val() ? Object.values(snap.val()).sort((a,b) => b.timestamp - a.timestamp) : [];
+    
     const render = (list) => {
         feed.innerHTML = "";
+        if (list.length === 0) {
+            feed.innerHTML = `<div style="text-align:center; padding:100px 20px; opacity:0.5;">
+                <div style="font-family:'Cinzel'; font-size:12px; letter-spacing:5px;">NO LEGACIES FOUND</div>
+            </div>`;
+            return;
+        }
+
         list.forEach(item => {
-            const art = document.createElement("div"); art.className = "artwork";
-            art.innerHTML = `<div class="quote">“${item.message}”</div>
-                             <div class="sig">— ${item.signature.toUpperCase()} | ${item.fromDept.toUpperCase()} TO ${item.targetName.toUpperCase()}</div>`;
+            const art = document.createElement("div"); 
+            art.className = "artwork";
+            
+            // Handle legacy data vs new data structure
+            const sRole = item.senderRole || item.fromDept || "UNKNOWN";
+            const rRole = item.receiverRole || "PARTICIPANT";
+
+            art.innerHTML = `
+                <div class="quote">“${item.message}”</div>
+                <div class="sig">
+                    — ${item.signature.toUpperCase()} (${sRole.toUpperCase()})
+                    <br>TO ${item.targetName.toUpperCase()} (${rRole.toUpperCase()})
+                </div>`;
+            
             if(currentUser && item.authorId === currentUser.id){
                 const del = document.createElement("div");
                 del.innerText = "[ REDACT ]";
@@ -282,12 +319,32 @@ db.ref("registry").on("value", snap => {
             feed.appendChild(art);
         });
     };
+
     render(items);
-    document.getElementById("search2").oninput = (e) => {
+
+    document.getElementById("search").oninput = (e) => {
         const term = e.target.value.toLowerCase();
-        render(items.filter(i => i.targetName.toLowerCase().includes(term) || i.message.toLowerCase().includes(term)));
+        const filtered = items.filter(i => 
+            i.targetName.toLowerCase().includes(term) || 
+            i.message.toLowerCase().includes(term) ||
+            i.signature.toLowerCase().includes(term) ||
+            (i.senderRole && i.senderRole.toLowerCase().includes(term)) ||
+            (i.receiverRole && i.receiverRole.toLowerCase().includes(term))
+        );
+        render(filtered);
     };
+});
+
+// --- VISUAL LIGHT EFFECT ---
+const light = document.createElement('div');
+light.style.cssText = `position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:2;
+    background: radial-gradient(circle 400px at var(--x, 50%) var(--y, 50%), transparent 0%, rgba(253,252,240,0.4) 100%);`;
+document.body.appendChild(light);
+window.addEventListener('mousemove', e => {
+    light.style.setProperty('--x', e.clientX + 'px');
+    light.style.setProperty('--y', e.clientY + 'px');
 });
 </script>
 </body>
 </html>
+
