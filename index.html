@@ -1,384 +1,313 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>The Collective Myth | ISA 2026</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>The Collective Myth | ISA 2026</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,700&family=Cinzel:wght@400&family=Montserrat:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-  <style>
-    :root {
-      /* Warm Luxury Palette */
-      --night: #1E1B32;           /* Warm Indigo Base */
-      --panel: rgba(42, 39, 71, 0.8); 
-      --vellum: #FDFCF0;          /* Warm Cream Text/High-lights */
-      --stardust: #E2E8F0;        
-      
-      /* Pastel Accents */
-      --accent-blue: #B2C0FF;     /* Periwinkle */
-      --accent-purple: #D7BBF5;   /* Lavender */
-      --accent-warm: #FFE4D6;     /* Peach Glow */
-      
-      --glass: rgba(255, 255, 255, 0.03);
-      --glass-border: rgba(253, 252, 240, 0.15); /* Creamy border */
-      
-      --shadow: 0 30px 60px rgba(0,0,0,0.4);
-      --ease: cubic-bezier(0.16, 1, 0.3, 1);
-      --radius-xl: 32px;
-      --radius-lg: 20px;
-    }
+    <style>
+        :root {
+            /* Your New Palette */
+            --cream-light: #FDFCF0;      /* Champagne Cream */
+            --lavender-dust: #27BBF5;    /* Dusty Lavender */
+            --rose-peach: #F4A4A6;       /* Rose Peach */
+            --periwinkle: #82C0FF;       /* Periwinkle Silk */
+            
+            /* UI Foundation */
+            --obsidian: #080808;
+            --ink-border: rgba(253, 252, 240, 0.15); 
+            --blood-red: #8B0000;
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-    * { box-sizing: border-box; }
+        * { box-sizing: border-box; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
 
-    body {
-      margin: 0;
-      background: var(--night);
-      color: var(--stardust);
-      font-family: "Cormorant Garamond", serif;
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
+        body, html {
+            margin: 0;
+            background-color: var(--obsidian);
+            color: var(--cream-light);
+            font-family: 'Cormorant Garamond', serif;
+            overflow-x: hidden;
+            width: 100%;
+        }
 
-    /* Background Atmosphere */
-    body::before {
-      content: "";
-      position: fixed; inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 80% 10%, rgba(255, 228, 214, 0.1) 0%, transparent 40%),
-        radial-gradient(circle at 20% 90%, rgba(215, 187, 245, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 50% 50%, var(--night) 0%, #141225 100%);
-      z-index: -1;
-    }
+        /* --- DEVICE ADAPTIVE CURSOR --- */
+        .cursor-dot, .cursor-outline {
+            pointer-events: none;
+            position: fixed;
+            top: 0; left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            display: none;
+        }
+        
+        @media (pointer: fine) {
+            .cursor-dot, .cursor-outline { display: block; }
+            body { cursor: none; }
+            button, input, select, textarea, .scroll-indicator, .artwork { cursor: none; }
+        }
 
-    /* --- Hero Section --- */
-    .hero-section {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 40px 20px;
-      text-align: center;
-    }
+        .cursor-dot { width: 6px; height: 6px; background-color: var(--periwinkle); }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid var(--lavender-dust); transition: transform 0.2s ease-out; }
 
-    .hero-shell {
-      max-width: 900px;
-      padding: 60px;
-      border-radius: var(--radius-xl);
-      background: var(--panel);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--shadow);
-    }
+        /* --- HERO SECTION --- */
+        .hero-section {
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: radial-gradient(circle at center, #121212 0%, var(--obsidian) 100%);
+        }
 
-    .kicker {
-      font-family: 'Cinzel', serif;
-      letter-spacing: 5px;
-      color: var(--accent-warm);
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      margin-bottom: 20px;
-    }
+        .hero-section h1 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(2.5rem, 10vw, 8.5rem);
+            font-weight: 400;
+            margin: 0;
+            color: var(--cream-light);
+            text-shadow: 0 0 30px rgba(130, 192, 255, 0.15);
+        }
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: clamp(2.5rem, 7vw, 5rem);
-      margin: 0;
-      color: var(--vellum);
-      line-height: 1.1;
-    }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
 
-    .subtitle {
-      font-size: 1.25rem;
-      color: var(--stardust);
-      opacity: 0.8;
-      max-width: 600px;
-      margin: 25px auto;
-    }
+        /* --- LAYOUT GRID --- */
+        .museum-container {
+            display: grid;
+            grid-template-columns: 460px 1fr;
+            min-height: 100vh;
+            border-top: 1px solid var(--ink-border);
+        }
 
-    /* --- Main Layout --- */
-    .museum-container {
-      display: grid;
-      grid-template-columns: 400px 1fr;
-      min-height: 100vh;
-      border-top: 1px solid var(--glass-border);
-    }
+        @media (max-width: 1100px) {
+            .museum-container { grid-template-columns: 1fr; }
+            .scribe-desk { border-right: none; border-bottom: 1px solid var(--ink-border); padding: 60px 30px !important; }
+            .grand-gallery { padding: 60px 30px !important; }
+        }
 
-    @media (max-width: 900px) {
-      .museum-container { grid-template-columns: 1fr; }
-    }
+        .scribe-desk {
+            padding: 80px 60px;
+            border-right: 1px solid var(--ink-border);
+            display: flex;
+            flex-direction: column;
+            background-color: var(--obsidian);
+        }
 
-    /* --- Form Panel (The Scribe Desk) --- */
-    .scribe-desk {
-      padding: 60px 40px;
-      background: rgba(0, 0, 0, 0.1);
-      border-right: 1px solid var(--glass-border);
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      overflow-y: auto;
-    }
+        /* --- FORM ELEMENTS --- */
+        input, select, textarea {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid var(--ink-border);
+            background: transparent;
+            font-family: 'Cormorant Garamond';
+            font-size: 1.2rem;
+            color: var(--cream-light);
+            padding: 12px 0;
+            margin-bottom: 40px;
+            outline: none;
+            border-radius: 0;
+        }
 
-    @media (max-width: 900px) { .scribe-desk { position: static; height: auto; } }
+        input::placeholder, textarea::placeholder { color: rgba(253, 252, 240, 0.4); }
 
-    .panel-title h2 {
-      font-family: 'Cinzel', serif;
-      color: var(--accent-blue);
-      margin-top: 0;
-    }
+        button.primary {
+            background: transparent; 
+            color: var(--rose-peach); 
+            border: 1px solid var(--rose-peach);
+            padding: 22px; 
+            font-family: 'Montserrat'; 
+            font-size: 10px; 
+            letter-spacing: 0.5rem;
+            cursor: pointer; 
+            transition: var(--transition); 
+            text-transform: uppercase;
+            width: 100%;
+        }
 
-    label {
-      display: block;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin: 20px 0 8px;
-      color: var(--accent-warm);
-    }
+        button.primary:hover:not(:disabled) { background: var(--rose-peach); color: var(--obsidian); }
+        button.primary:disabled { opacity: 0.3; cursor: default; }
 
-    input, select, textarea {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--glass-border);
-      padding: 12px;
-      border-radius: 8px;
-      color: var(--vellum);
-      font-family: inherit;
-      font-size: 1rem;
-    }
+        /* --- ARTWORK FEED --- */
+        .artwork { padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,0.05); transition: var(--transition); }
+        .artwork:hover { padding-left: 10px; border-bottom-color: var(--periwinkle); }
+        .quote { font-size: clamp(1.4rem, 4vw, 1.9rem); font-style: italic; line-height: 1.4; margin-bottom: 15px; }
+        .sig { font-family: 'Montserrat'; font-size: 9px; color: var(--lavender-dust); letter-spacing: 2px; }
 
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: var(--accent-blue);
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    button.primary {
-      width: 100%;
-      padding: 18px;
-      border: none;
-      border-radius: 50px;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-top: 30px;
-      cursor: pointer;
-      transition: all 0.3s var(--ease);
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-      color: #1E1B32;
-      box-shadow: 0 10px 30px rgba(178, 192, 255, 0.2);
-    }
-
-    button.primary:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.1);
-      box-shadow: 0 15px 40px rgba(178, 192, 255, 0.4);
-    }
-
-    button.primary:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    /* --- Archive Feed --- */
-    .grand-gallery {
-      padding: 60px;
-    }
-
-    .artwork {
-      padding: 30px;
-      margin-bottom: 30px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(15px);
-      transition: transform 0.3s var(--ease);
-    }
-
-    .artwork:hover {
-      transform: scale(1.02);
-    }
-
-    .quote {
-      font-size: 1.5rem;
-      font-style: italic;
-      color: var(--vellum);
-      margin-bottom: 20px;
-    }
-
-    .attribution {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.75rem;
-    }
-
-    .pill {
-      background: rgba(178, 192, 255, 0.1);
-      border: 1px solid var(--accent-blue);
-      padding: 4px 12px;
-      border-radius: 20px;
-      color: var(--accent-blue);
-    }
-
-    .redact-btn {
-      background: transparent;
-      border: 1px solid #ff6b6b;
-      color: #ff6b6b;
-      padding: 4px 10px;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-top: 15px;
-      font-size: 0.7rem;
-    }
-
-    #status {
-      font-size: 0.8rem;
-      margin-top: 10px;
-      text-align: center;
-      color: var(--accent-purple);
-    }
-
-  </style>
+    </style>
 </head>
+
 <body>
 
-  <section class="hero-section">
-    <div class="hero-shell">
-      <div class="kicker">The Collective Myth</div>
-      <h1>ISA Cultural Fest 2026</h1>
-      <div class="subtitle">A living sanctuary of student legacies. Every testimony is a thread woven into the velvet tapestry of our history.</div>
-    </div>
-  </section>
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
 
-  <div class="museum-container">
-    <aside class="scribe-desk">
-      <div class="panel-title">
-        <h2>The Registry</h2>
-      </div>
-
-      <div id="auth-section">
-        <div id="g_id_onload"
-             data-client_id="YOUR_GOOGLE_CLIENT_ID" 
-             data-callback="handleCredentialResponse">
+    <section class="hero-section">
+        <div style="font-family:Cinzel; font-size:10px; letter-spacing:6px; color:var(--periwinkle); margin-bottom:20px;">The Collective Myth</div>
+        <h1>ISA Cultural Fest 2026</h1>
+        <div style="font-family:Montserrat; font-size:8px; letter-spacing:4px; color:var(--rose-peach); margin-top:30px; opacity:0.8;">ETCHING STUDENT LEGACIES INTO TIME</div>
+        
+        <div class="scroll-indicator" 
+             style="margin-top: 60px; cursor:pointer; animation: bounce 2s infinite;" 
+             onclick="scrollToRegistry()">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--cream-light)" stroke-width="1">
+                <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+            </svg>
         </div>
-        <div class="g_id_signin" data-type="standard"></div>
-        <div id="status">Please Sign in to contribute</div>
-      </div>
+    </section>
 
-      <div id="form-content">
-        <label>Recipient (Team or Individual)</label>
-        <input type="text" id="recipient" placeholder="Who are you thanking?">
-
-        <label>The Testimony</label>
-        <textarea id="message" rows="5" placeholder="Write your message here..."></textarea>
-
-        <label>Signature</label>
-        <input type="text" id="signature" placeholder="Your Name">
-
-        <label>Department</label>
-        <select id="department">
-          <option>Core Committee</option>
-          <option>PR & Marketing</option>
-          <option>Finance</option>
-          <option>Logistics</option>
-          <option>Performers</option>
-          <option>Attendees</option>
-        </select>
-
-        <button class="primary" id="submit-btn" disabled>Record Message</button>
-      </div>
-    </aside>
-
-    <main class="grand-gallery">
-      <div id="feed">
-        </div>
-    </main>
-  </div>
-
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-
-  <script>
-    // --- FIREBASE CONFIG ---
-    const firebaseConfig = {
-      apiKey: "AIzaSy...", // Replace with your key
-      databaseURL: "https://your-db-url.firebaseio.com",
-      projectId: "your-project-id",
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-
-    let currentUser = null;
-
-    // --- GOOGLE AUTH HANDLER ---
-    function handleCredentialResponse(response) {
-      const payload = JSON.parse(atob(response.credential.split('.')[1]));
-      currentUser = payload;
-      document.getElementById('status').innerText = `Welcome, ${payload.name}`;
-      document.getElementById('submit-btn').disabled = false;
-    }
-
-    // --- SUBMISSION ---
-    document.getElementById('submit-btn').onclick = function() {
-      const data = {
-        recipient: document.getElementById('recipient').value,
-        message: document.getElementById('message').value,
-        signature: document.getElementById('signature').value,
-        dept: document.getElementById('department').value,
-        uid: currentUser.sub,
-        timestamp: Date.now()
-      };
-
-      if (!data.message || !data.recipient) return alert("Please fill the fields");
-
-      const newPostKey = db.ref().child('posts').push().key;
-      db.ref('posts/' + newPostKey).set(data);
-      
-      // Clear form
-      document.getElementById('message').value = "";
-    };
-
-    // --- LIVE FEED ---
-    db.ref('posts').on('value', (snapshot) => {
-      const feed = document.getElementById('feed');
-      feed.innerHTML = "";
-      const posts = snapshot.val();
-      
-      if (posts) {
-        Object.keys(posts).reverse().forEach(key => {
-          const post = posts[key];
-          const card = document.createElement('div');
-          card.className = 'artwork';
-          card.innerHTML = `
-            <div class="quote">"${post.message}"</div>
-            <div class="attribution">
-              <span class="pill">${post.dept}</span>
-              <span><strong>${post.signature}</strong> for <strong>${post.recipient}</strong></span>
+    <div class="museum-container" id="registry-start">
+        <aside class="scribe-desk">
+            <h2 style="font-family:'Playfair Display'; font-style:italic; font-size:2.8rem; margin:0 0 40px 0; color: var(--cream-light);">The Registry</h2>
+            
+            <div id="auth-ui">
+                <div id="g_id_onload" data-client_id="671163289983-2056vpimutuatgerek6676pr1ob9p1n0.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
+                <div class="g_id_signin" id="google-btn" style="margin-bottom: 40px;"></div>
+                <button id="signout-btn" class="primary" style="display:none; border-color:var(--blood-red); color:var(--blood-red); margin-bottom:40px; padding: 10px;">REVOKE SCRIBE STATUS</button>
             </div>
-          `;
 
-          // Allow deletion if it's the user's post
-          if (currentUser && post.uid === currentUser.sub) {
-            const delBtn = document.createElement('button');
-            delBtn.className = 'redact-btn';
-            delBtn.innerText = "Redact Message";
-            delBtn.onclick = () => db.ref('posts/' + key).remove();
-            card.appendChild(delBtn);
-          }
+            <input id="recipient" placeholder="Recipient (Name or Team)" />
+            <input id="signature" placeholder="The Scribe (Your Name)" />
+            <select id="from"></select>
+            <textarea id="msg" style="min-height: 120px;" placeholder="The Testimony..."></textarea>
 
-          feed.appendChild(card);
-        });
-      }
+            <button class="primary" id="submit" disabled>RECORD INTO HISTORY</button>
+            <div id="status" style="font-size: 8px; text-align: center; margin-top: 20px; color: var(--periwinkle); letter-spacing: 2px; text-transform: uppercase;">Authentication Required</div>
+        </aside>
+
+        <main class="grand-gallery">
+            <header style="margin-bottom: 60px; border-bottom: 1px solid var(--ink-border); padding-bottom: 15px;">
+                <input id="search2" style="font-size: 1.4rem; border:none; margin-bottom: 0;" placeholder="Search the archives..." />
+            </header>
+            <div id="feed"></div>
+        </main>
+    </div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+// --- CONFIG & FIREBASE ---
+firebase.initializeApp({
+    apiKey: "AIzaSyBfj4i0quFWPTHCdnC8GT3BSEsKvvvqzRA",
+    authDomain: "isa-culturtal-fest-2026.firebaseapp.com",
+    databaseURL: "https://isa-culturtal-fest-2026-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "isa-culturtal-fest-2026"
+});
+const db = firebase.database();
+
+// --- SCROLL LOGIC ---
+function scrollToRegistry() {
+    const target = document.getElementById('registry-start');
+    if (target) {
+        setTimeout(() => { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50);
+    }
+}
+
+// --- CURSOR LOGIC ---
+const dot = document.querySelector("[data-cursor-dot]");
+const outline = document.querySelector("[data-cursor-outline]");
+if (window.matchMedia("(pointer: fine)").matches) {
+    window.addEventListener("mousemove", e => {
+        dot.style.left = outline.style.left = `${e.clientX}px`;
+        dot.style.top = outline.style.top = `${e.clientY}px`;
+        outline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 400, fill: "forwards" });
     });
-  </script>
+}
+
+// --- SESSION & PERSISTENCE ---
+let currentUser = JSON.parse(localStorage.getItem("scribe_user"));
+const msgIn = document.getElementById("msg"), recIn = document.getElementById("recipient");
+
+window.onload = () => {
+    if(localStorage.getItem("draft_msg")) msgIn.value = localStorage.getItem("draft_msg");
+    if(localStorage.getItem("draft_rec")) recIn.value = localStorage.getItem("draft_rec");
+    if(currentUser) updateAuthUI(true);
+};
+
+msgIn.oninput = () => localStorage.setItem("draft_msg", msgIn.value);
+recIn.oninput = () => localStorage.setItem("draft_rec", recIn.value);
+
+function handleCredentialResponse(response){
+    const payload = JSON.parse(atob(response.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));
+    currentUser = { id: payload.sub };
+    localStorage.setItem("scribe_user", JSON.stringify(currentUser));
+    updateAuthUI(true);
+}
+
+function updateAuthUI(isLoggedIn) {
+    document.getElementById("google-btn").style.display = isLoggedIn ? "none" : "block";
+    document.getElementById("signout-btn").style.display = isLoggedIn ? "block" : "none";
+    document.getElementById("submit").disabled = !isLoggedIn;
+    document.getElementById("status").textContent = isLoggedIn ? "Scribe Recognized" : "Authentication Required";
+}
+
+document.getElementById("signout-btn").onclick = () => {
+    localStorage.clear();
+    location.reload();
+};
+
+// --- APP DATA ---
+const roles = ["Core Committee", "PR", "Finance", "Co-Presidents", "Helpers", "Activity Team", "HR", "Ambassadors", "Attendees"];
+roles.forEach(r => document.getElementById("from").add(new Option(r, r)));
+
+document.getElementById("submit").onclick = function() {
+    const targetName = recIn.value, message = msgIn.value;
+    if(!targetName || !message) return;
+    this.disabled = true; this.innerText = "ETCHING...";
+    
+    const newKey = db.ref().child("registry").push().key;
+    db.ref("registry/" + newKey).set({
+        id: newKey, targetName, fromDept: document.getElementById("from").value,
+        message, signature: document.getElementById("signature").value || 'Anonymous',
+        authorId: currentUser.id, timestamp: Date.now()
+    }).then(() => {
+        msgIn.value = recIn.value = "";
+        localStorage.removeItem("draft_msg"); localStorage.removeItem("draft_rec");
+        this.disabled = false; this.innerText = "RECORD INTO HISTORY";
+    });
+};
+
+// --- FEED & SEARCH ---
+db.ref("registry").on("value", snap => {
+    const feed = document.getElementById("feed");
+    const data = snap.val();
+    const items = data ? Object.values(data).sort((a,b) => b.timestamp - a.timestamp) : [];
+    
+    const render = (list) => {
+        feed.innerHTML = "";
+        list.forEach(item => {
+            const art = document.createElement("div"); art.className = "artwork";
+            art.innerHTML = `<div class="quote">“${item.message}”</div>
+                             <div class="sig">— ${item.signature.toUpperCase()} | ${item.fromDept.toUpperCase()} TO ${item.targetName.toUpperCase()}</div>`;
+            if(currentUser && item.authorId === currentUser.id){
+                const del = document.createElement("div");
+                del.innerText = "[ REDACT ]";
+                del.style = "color:var(--blood-red); font-size:9px; margin-top:15px; cursor:pointer; letter-spacing:2px; font-family:Montserrat;";
+                del.onclick = () => db.ref("registry/"+item.id).remove();
+                art.appendChild(del);
+            }
+            feed.appendChild(art);
+        });
+    };
+
+    render(items);
+    document.getElementById("search2").oninput = (e) => {
+        const term = e.target.value.toLowerCase();
+        render(items.filter(i => i.targetName.toLowerCase().includes(term) || i.message.toLowerCase().includes(term)));
+    };
+});
+</script>
 </body>
 </html>
