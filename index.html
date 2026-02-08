@@ -6,533 +6,188 @@
   <title>The Collective Myth | ISA 2026</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cinzel:wght@400;600&family=Montserrat:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 
   <style>
-    :root{
-      /* Embassy-friendly mythic archive */
-      --night:#07070A;           /* deep ink */
-      --nocturne:#0C0D12;        /* panel ink */
-      --vellum:#F3EEE4;          /* parchment highlight */
-      --stardust:#E7E7EA;        /* text */
-      --ash:#B9BBC3;             /* muted text */
-      --gilt:#C7A45D;            /* champagne gold */
-      --gilt2:#E2C98A;           /* warm highlight */
-      --inkline: rgba(199,164,93,0.22);
-      --softline: rgba(255,255,255,0.06);
+    :root {
+      /* Ethereal Twilight Palette */
+      --night: #0B0A15;           /* Deep space indigo */
+      --nocturne: #121124;        /* Frosted panel */
+      --stardust: #F1F5F9;        /* Off-white text */
+      --ash: #94A3B8;             /* Muted slate */
+      
+      /* Pastel Accents */
+      --accent-blue: #A5B4FC;     /* Pastel Periwinkle */
+      --accent-purple: #D8B4FE;   /* Pastel Lavender */
+      --accent-cyan: #99F6E4;     /* Minty Glow */
+      
+      --glass: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --inkline: rgba(165, 180, 252, 0.15);
 
-      --shadow: 0 24px 80px rgba(0,0,0,0.55);
-      --shadow2: 0 10px 30px rgba(0,0,0,0.35);
-
-      --radius-xl: 28px;
-      --radius-lg: 18px;
-      --radius-md: 14px;
+      --shadow: 0 24px 80px rgba(0,0,0,0.4);
+      --radius-xl: 32px;
+      --radius-lg: 20px;
+      --radius-md: 12px;
 
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
-      --t: 650ms var(--ease);
+      --t: 500ms var(--ease);
     }
 
-    *{ box-sizing:border-box; scroll-behavior:smooth; -webkit-tap-highlight-color: transparent; }
-    html, body{
-      margin:0;
-      width:100%;
+    /* --- Background Nebula --- */
+    body {
+      margin: 0;
+      width: 100%;
       background: var(--night);
       color: var(--stardust);
       font-family: "Cormorant Garamond", serif;
-      overflow-x:hidden;
+      overflow-x: hidden;
     }
 
-    /* --- Ambient mythic background (constellations + marbling) --- */
-    body::before{
-      content:"";
-      position:fixed; inset:0;
-      pointer-events:none;
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none;
       background:
-        radial-gradient(1200px 800px at 20% 15%, rgba(199,164,93,0.10) 0%, rgba(199,164,93,0.03) 35%, transparent 60%),
-        radial-gradient(900px 700px at 85% 25%, rgba(120,140,255,0.08) 0%, rgba(120,140,255,0.02) 40%, transparent 70%),
-        radial-gradient(1100px 900px at 50% 85%, rgba(180,120,240,0.06) 0%, rgba(180,120,240,0.02) 45%, transparent 75%),
-        linear-gradient(180deg, rgba(255,255,255,0.05), transparent 45%),
-        radial-gradient(circle at 40% 60%, rgba(255,255,255,0.02) 0 2px, transparent 3px),
-        radial-gradient(circle at 70% 35%, rgba(255,255,255,0.018) 0 2px, transparent 3px),
-        radial-gradient(circle at 25% 75%, rgba(255,255,255,0.016) 0 2px, transparent 3px);
-      filter: blur(0px);
-      opacity: 1;
-      mix-blend-mode: screen;
+        radial-gradient(circle at 80% 20%, rgba(216, 180, 254, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 20% 80%, rgba(165, 180, 252, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(153, 246, 228, 0.03) 0%, transparent 50%);
+      z-index: -1;
     }
 
-    /* --- DEVICE ADAPTIVE CURSOR --- */
-    .cursor-dot, .cursor-outline{
-      pointer-events:none;
-      position:fixed; top:0; left:0;
-      transform: translate(-50%,-50%);
-      border-radius:50%;
-      z-index:9999;
-      display:none;
+    /* --- Custom Cursor --- */
+    .cursor-dot, .cursor-outline {
+      pointer-events: none; position: fixed; top: 0; left: 0;
+      transform: translate(-50%,-50%); border-radius: 50%; z-index: 9999; display: none;
     }
-    @media (pointer:fine){
-      .cursor-dot,.cursor-outline{ display:block; }
-      body{ cursor:none; }
-      button,input,select,textarea,.scroll-indicator,.artwork{ cursor:none; }
+    @media (pointer:fine) {
+      .cursor-dot, .cursor-outline { display: block; }
+      body { cursor: none; }
+      button, input, select, textarea, .scroll-indicator, .artwork { cursor: none; }
     }
-    .cursor-dot{
-      width:6px; height:6px;
-      background: radial-gradient(circle at 30% 30%, var(--gilt2), var(--gilt));
-      box-shadow: 0 0 18px rgba(199,164,93,0.55);
-    }
-    .cursor-outline{
-      width:42px; height:42px;
-      border: 1px solid rgba(199,164,93,0.55);
-      box-shadow: 0 0 30px rgba(199,164,93,0.10);
-      transition: transform 220ms ease;
-      backdrop-filter: blur(2px);
+    .cursor-dot { width: 6px; height: 6px; background: var(--accent-cyan); box-shadow: 0 0 15px var(--accent-cyan); }
+    .cursor-outline { width: 40px; height: 40px; border: 1px solid var(--accent-purple); transition: transform 0.2s; backdrop-filter: blur(1px); }
+
+    /* --- Hero Section --- */
+    .hero-section {
+      min-height: 100dvh; display: flex; flex-direction: column; justify-content: center;
+      align-items: center; text-align: center; padding: 20px; isolation: isolate;
     }
 
-    /* --- HERO SECTION --- */
-    .hero-section{
-      min-height: 100dvh;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      padding: 28px 18px;
-      position:relative;
-      isolation:isolate;
-    }
-
-    .hero-shell{
-      width:min(1080px, 100%);
-      border: 1px solid var(--softline);
+    .hero-shell {
+      width: min(1000px, 100%);
+      padding: clamp(40px, 8vw, 80px);
       border-radius: var(--radius-xl);
-      background:
-        radial-gradient(800px 500px at 50% 0%, rgba(199,164,93,0.10), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
       box-shadow: var(--shadow);
-      padding: clamp(28px, 5vw, 54px);
-      position:relative;
-      overflow:hidden;
+      position: relative;
     }
 
-    /* Filigree border glow */
-    .hero-shell::before{
-      content:"";
-      position:absolute; inset:-2px;
-      border-radius: var(--radius-xl);
-      background:
-        radial-gradient(600px 240px at 20% 10%, rgba(199,164,93,0.18), transparent 55%),
-        radial-gradient(600px 240px at 80% 90%, rgba(120,140,255,0.10), transparent 55%);
-      opacity:0.9;
-      pointer-events:none;
-      mix-blend-mode: screen;
+    .kicker {
+      font-family: "Cinzel", serif; font-size: 10px; letter-spacing: 6px;
+      color: var(--accent-cyan); text-transform: uppercase; margin-bottom: 20px;
     }
 
-    .kicker{
-      font-family: "Cinzel", serif;
-      font-size: 11px;
-      letter-spacing: 7px;
-      color: var(--gilt);
-      text-transform: uppercase;
-      opacity: 0.95;
-      margin-bottom: 18px;
+    h1 {
+      font-family: "Playfair Display", serif; font-style: italic; font-weight: 500;
+      font-size: clamp(2.5rem, 8vw, 6rem); margin: 0;
+      background: linear-gradient(135deg, #FFF 30%, var(--accent-blue) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      line-height: 1.1;
     }
 
-    .hero-section h1{
-      font-family:"Playfair Display", serif;
-      font-style: italic;
-      font-weight: 500;
-      font-size: clamp(2.6rem, 7.8vw, 6.8rem);
-      margin:0;
-      color:#fff;
-      line-height: 1.02;
-      text-shadow: 0 12px 50px rgba(0,0,0,0.45);
+    .subtitle {
+      margin: 24px auto; font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: var(--ash); max-width: 55ch; line-height: 1.6;
     }
 
-    .subtitle{
-      margin-top: 18px;
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(1.05rem, 2.1vw, 1.35rem);
-      color: rgba(231,231,234,0.86);
-      line-height: 1.55;
-      max-width: 62ch;
-      margin-left:auto; margin-right:auto;
+    /* --- Layout --- */
+    .museum-container {
+      display: grid; grid-template-columns: 420px 1fr; border-top: 1px solid var(--glass-border);
     }
 
-    .motto{
-      margin-top: 24px;
-      font-family:"Montserrat", sans-serif;
-      font-size: 10px;
-      letter-spacing: 5px;
-      color: var(--gilt);
-      text-transform: uppercase;
-      opacity: 0.82;
+    @media (max-width: 1100px) { .museum-container { grid-template-columns: 1fr; } }
+
+    .scribe-desk {
+      padding: 60px 40px; border-right: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.01);
     }
 
-    .scroll-indicator{
-      margin-top: 34px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width: 48px;
-      height: 48px;
-      border-radius: 999px;
-      border: 1px solid rgba(199,164,93,0.45);
-      background: rgba(12,13,18,0.35);
-      transition: transform var(--t), background var(--t), border-color var(--t);
-      box-shadow: var(--shadow2);
-      cursor:pointer;
-    }
-    .scroll-indicator:hover{
-      transform: translateY(2px) scale(1.02);
-      background: rgba(199,164,93,0.12);
-      border-color: rgba(199,164,93,0.75);
+    .panel-title h2 { font-family: "Playfair Display", serif; font-style: italic; font-size: 2.2rem; margin: 0; color: var(--accent-purple); }
+    
+    /* --- Form Elements --- */
+    label.mini {
+      display: block; font-family: "Montserrat", sans-serif; font-size: 9px;
+      letter-spacing: 3px; color: var(--accent-blue); text-transform: uppercase; margin: 20px 0 8px;
     }
 
-    @keyframes floaty{
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(6px); }
-    }
-    .scroll-indicator{ animation: floaty 2.6s ease-in-out infinite; }
-
-    /* --- LAYOUT GRID --- */
-    .museum-container{
-      display:grid;
-      grid-template-columns: 460px 1fr;
-      min-height:100vh;
-      border-top: 1px solid var(--softline);
-      position:relative;
+    input, select, textarea {
+      width: 100%; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.2);
+      color: #fff; padding: 15px; border-radius: var(--radius-md); outline: none;
+      font-family: "Cormorant Garamond", serif; font-size: 1.1rem; transition: var(--t);
     }
 
-    @media (max-width: 1100px){
-      .museum-container{ grid-template-columns: 1fr; }
-      .scribe-desk{
-        border-right:none;
-        border-bottom: 1px solid var(--softline);
-        padding: 54px 22px !important;
-      }
-      .grand-gallery{ padding: 54px 22px !important; }
+    input:focus, textarea:focus { border-color: var(--accent-blue); background: rgba(165,180,252,0.05); }
+
+    button.primary {
+      width: 100%; margin-top: 25px; padding: 20px; border-radius: 50px;
+      border: none; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      color: var(--night); font-family: "Montserrat", sans-serif; font-weight: 600;
+      font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+      transition: var(--t); box-shadow: 0 10px 30px rgba(165,180,252,0.2);
     }
 
-    .scribe-desk{
-      padding: 78px 58px;
-      border-right: 1px solid var(--softline);
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.012));
-      position:relative;
-    }
-    .scribe-desk::before{
-      content:"";
-      position:absolute; inset:0;
-      pointer-events:none;
-      background:
-        radial-gradient(700px 500px at 30% 20%, rgba(199,164,93,0.10), transparent 60%),
-        radial-gradient(900px 700px at 70% 90%, rgba(180,120,240,0.06), transparent 65%);
-      opacity: 0.75;
-    }
+    button.primary:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(165,180,252,0.4); opacity: 0.9; }
+    button.primary:disabled { opacity: 0.2; filter: grayscale(1); }
 
-    .panel-title{
-      position:relative;
-      margin:0 0 34px 0;
-    }
-    .panel-title h2{
-      font-family:"Playfair Display", serif;
-      font-style: italic;
-      font-weight: 600;
-      font-size: 2.55rem;
-      margin:0;
-      letter-spacing: 0.2px;
-    }
-    .panel-title .note{
-      margin-top: 10px;
-      color: rgba(231,231,234,0.78);
-      font-size: 1.05rem;
-      line-height: 1.55;
-      max-width: 46ch;
-    }
-
-    /* --- FORM ELEMENTS --- */
-    label.mini{
-      display:block;
-      font-family:"Montserrat", sans-serif;
-      font-size: 9px;
-      letter-spacing: 4px;
-      color: rgba(199,164,93,0.85);
-      text-transform: uppercase;
-      margin: 18px 0 8px;
-      position:relative;
-      z-index:1;
-    }
-
-    input, select, textarea{
-      width:100%;
-      border: 1px solid rgba(199,164,93,0.18);
-      background: rgba(12,13,18,0.30);
-      color: #fff;
-      padding: 14px 14px;
-      border-radius: 14px;
-      outline:none;
-      font-family:"Cormorant Garamond", serif;
-      font-size: 1.15rem;
-      transition: border-color var(--t), transform var(--t), background var(--t);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
-      position:relative;
-      z-index:1;
-    }
-    input::placeholder, textarea::placeholder{
-      color: rgba(231,231,234,0.55);
-    }
-    input:focus, select:focus, textarea:focus{
-      border-color: rgba(199,164,93,0.55);
-      background: rgba(12,13,18,0.44);
-      transform: translateY(-1px);
-    }
-    textarea{
-      resize: vertical;
-      min-height: 140px;
-      line-height: 1.5;
-    }
-
-    /* --- Buttons (wax-seal inspired) --- */
-    button.primary{
-      width:100%;
-      margin-top: 18px;
-      padding: 18px 18px;
-      border-radius: 999px;
-      border: 1px solid rgba(199,164,93,0.60);
-      background:
-        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.10), transparent 50%),
-        linear-gradient(180deg, rgba(199,164,93,0.12), rgba(199,164,93,0.06));
-      color: var(--stardust);
-      font-family:"Montserrat", sans-serif;
-      font-size: 10px;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      transition: transform var(--t), border-color var(--t), background var(--t), box-shadow var(--t), color var(--t);
-      box-shadow: 0 14px 35px rgba(0,0,0,0.35);
-      cursor:pointer;
-      position:relative;
-      z-index:1;
-    }
-    button.primary:hover:not(:disabled){
-      transform: translateY(-1px);
-      border-color: rgba(199,164,93,0.95);
-      background:
-        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.14), transparent 55%),
-        linear-gradient(180deg, rgba(199,164,93,0.22), rgba(199,164,93,0.10));
-      box-shadow: 0 18px 45px rgba(0,0,0,0.42);
-      color: #fff;
-    }
-    button.primary:disabled{
-      opacity:0.35;
-      cursor: default;
-      transform:none;
-      box-shadow:none;
-    }
-
-    /* Sign-out in diplomatic tone (no blood red) */
-    button.secondary{
-      width:100%;
-      padding: 12px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(231,231,234,0.20);
-      background: rgba(12,13,18,0.22);
-      color: rgba(231,231,234,0.82);
-      font-family:"Montserrat", sans-serif;
-      font-size: 9px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      transition: transform var(--t), border-color var(--t), background var(--t);
-      cursor:pointer;
-    }
-    button.secondary:hover{
-      transform: translateY(-1px);
-      border-color: rgba(199,164,93,0.45);
-      background: rgba(12,13,18,0.35);
-    }
-
-    /* Status line */
-    #status{
-      font-family:"Montserrat", sans-serif;
-      font-size: 9px;
-      text-align:center;
-      margin-top: 16px;
-      letter-spacing: 3.5px;
-      text-transform: uppercase;
-      color: rgba(199,164,93,0.90);
-      opacity: 0.95;
-      position:relative;
-      z-index:1;
-    }
-
-    /* --- Gallery --- */
-    .grand-gallery{
-      padding: 78px 66px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
-      position:relative;
-    }
-
-    .gallery-header{
-      display:flex;
-      align-items:flex-end;
-      justify-content: space-between;
-      gap: 18px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--softline);
-      margin-bottom: 34px;
-    }
-    .gallery-header h3{
-      margin:0;
-      font-family:"Cinzel", serif;
-      font-weight: 600;
-      font-size: 14px;
-      letter-spacing: 6px;
-      text-transform: uppercase;
-      color: rgba(231,231,234,0.92);
-    }
-    .gallery-header p{
-      margin: 10px 0 0 0;
-      color: rgba(231,231,234,0.70);
-      max-width: 52ch;
-      line-height: 1.55;
-    }
-
-    /* Search */
-    #search2{
-      font-family:"Cormorant Garamond", serif;
-      font-size: 1.2rem;
-      border-radius: 999px;
-      padding: 12px 14px;
-      margin:0;
-      width: min(420px, 100%);
-    }
-
-    /* --- ARTWORK FEED (cards like archival plaques) --- */
-    #feed{
-      display:flex;
-      flex-direction:column;
-      gap: 16px;
-    }
-
-    .artwork{
-      border: 1px solid rgba(199,164,93,0.16);
-      background:
-        radial-gradient(900px 380px at 10% 10%, rgba(199,164,93,0.08), transparent 55%),
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012));
+    /* --- Archive Feed --- */
+    .grand-gallery { padding: 60px 50px; }
+    
+    .artwork {
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(10px);
       border-radius: var(--radius-lg);
-      padding: 22px 22px;
-      transition: transform var(--t), border-color var(--t), background var(--t);
-      box-shadow: 0 14px 40px rgba(0,0,0,0.35);
-      position:relative;
-      overflow:hidden;
+      padding: 30px; margin-bottom: 20px;
+      transition: var(--t);
     }
 
-    .artwork::after{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(400px 160px at 20% 0%, rgba(199,164,93,0.10), transparent 60%),
-        radial-gradient(420px 220px at 80% 120%, rgba(180,120,240,0.06), transparent 60%);
-      opacity:0.7;
-      pointer-events:none;
-      mix-blend-mode: screen;
+    .artwork:hover {
+      border-color: rgba(165, 180, 252, 0.4);
+      transform: scale(1.01);
+      background: rgba(255, 255, 255, 0.04);
     }
 
-    .artwork:hover{
-      transform: translateY(-2px);
-      border-color: rgba(199,164,93,0.38);
-      background:
-        radial-gradient(900px 380px at 10% 10%, rgba(199,164,93,0.10), transparent 55%),
-        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.016));
+    .quote { font-size: 1.6rem; font-style: italic; line-height: 1.4; margin-bottom: 20px; color: #fff; }
+
+    .pill {
+      display: inline-flex; padding: 6px 14px; border-radius: 50px;
+      border: 1px solid rgba(165, 180, 252, 0.3);
+      background: rgba(165, 180, 252, 0.05);
+      color: var(--accent-blue); font-family: "Montserrat", sans-serif;
+      font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
     }
 
-    .quote{
-      position:relative;
-      z-index:1;
-      font-size: clamp(1.25rem, 2.4vw, 1.75rem);
-      font-style: italic;
-      line-height: 1.45;
-      margin: 0 0 14px 0;
-      color: rgba(255,255,255,0.95);
+    .redact {
+      margin-top: 20px; font-family: "Montserrat", sans-serif; font-size: 8px;
+      letter-spacing: 3px; color: var(--ash); border: 1px solid var(--glass-border);
+      padding: 8px 15px; border-radius: 50px; display: inline-block; transition: 0.3s;
     }
+    .redact:hover { color: #ff6b6b; border-color: #ff6b6b; }
 
-    .sig{
-      position:relative;
-      z-index:1;
-      display:flex;
-      flex-wrap:wrap;
-      gap: 8px 10px;
-      align-items:center;
-      font-family:"Montserrat", sans-serif;
-      font-size: 9px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: rgba(199,164,93,0.92);
-      opacity: 0.95;
+    .scroll-indicator {
+      margin-top: 40px; width: 50px; height: 50px; border-radius: 50%;
+      border: 1px solid var(--accent-blue); display: flex; align-items: center; justify-content: center;
+      animation: float 3s infinite ease-in-out;
     }
-    .sig span{
-      display:inline-flex;
-      align-items:center;
-      gap: 10px;
-    }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(199,164,93,0.28);
-      background: rgba(12,13,18,0.35);
-      color: rgba(231,231,234,0.88);
-      letter-spacing: 2.5px;
-      font-size: 8px;
-    }
-
-    .redact{
-      position:relative;
-      z-index:1;
-      margin-top: 14px;
-      display:inline-flex;
-      align-items:center;
-      gap: 10px;
-      font-family:"Montserrat", sans-serif;
-      font-size: 9px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: rgba(231,231,234,0.72);
-      cursor:pointer;
-      user-select:none;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(231,231,234,0.18);
-      background: rgba(12,13,18,0.20);
-      transition: transform var(--t), border-color var(--t), background var(--t), color var(--t);
-    }
-    .redact:hover{
-      transform: translateY(-1px);
-      border-color: rgba(199,164,93,0.42);
-      background: rgba(12,13,18,0.35);
-      color: rgba(199,164,93,0.92);
-    }
-
-    /* Subtle separator flourish */
-    .flourish{
-      width: 100%;
-      height: 1px;
-      margin: 18px 0 0;
-      background: linear-gradient(90deg, transparent, rgba(199,164,93,0.35), transparent);
-      opacity: 0.8;
-    }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      *{ scroll-behavior:auto !important; }
-      .scroll-indicator{ animation:none !important; }
-      .cursor-outline{ transition:none !important; }
-      button.primary, .artwork, input, textarea{ transition:none !important; }
-    }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
   </style>
 </head>
 
 <body>
-
   <div class="cursor-dot" data-cursor-dot></div>
   <div class="cursor-outline" data-cursor-outline></div>
 
@@ -540,13 +195,9 @@
     <div class="hero-shell">
       <div class="kicker">The Collective Myth</div>
       <h1>ISA Cultural Fest 2026</h1>
-      <div class="subtitle">
-        A living archive of gratitude — each testimony becomes a small myth: a proof that students built legacy with their own hands.
-      </div>
-      <div class="motto">ETCHING STUDENT LEGACIES INTO TIME</div>
-
-      <div class="scroll-indicator" onclick="scrollToRegistry()" aria-label="Scroll to registry">
-        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--gilt)" stroke-width="1">
+      <div class="subtitle">A living archive of gratitude. Every thread of testimony weaves the legend of the students who built this legacy.</div>
+      <div class="scroll-indicator" onclick="scrollToRegistry()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="1.5">
           <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
         </svg>
       </div>
@@ -557,43 +208,38 @@
     <aside class="scribe-desk">
       <div class="panel-title">
         <h2>The Registry</h2>
-        <div class="note">Sign in as a scribe, then record a message into the archive. Authors can redact their own entries.</div>
+        <p style="color: var(--ash); font-size: 0.9rem;">Sign in to record your testimony into the nebula.</p>
       </div>
 
-      <div id="auth-ui" style="position:relative; z-index:1;">
+      <div id="auth-ui">
         <div id="g_id_onload"
              data-client_id="671163289983-2056vpimutuatgerek6676pr1ob9p1n0.apps.googleusercontent.com"
              data-callback="handleCredentialResponse"></div>
-        <div class="g_id_signin" id="google-btn" style="margin-bottom: 16px;"></div>
-        <button id="signout-btn" class="secondary" style="display:none; margin-bottom: 18px;">SIGN OUT</button>
+        <div class="g_id_signin" id="google-btn"></div>
+        <button id="signout-btn" class="redact" style="display:none; width: 100%; margin-bottom: 20px;">SIGN OUT</button>
       </div>
 
-      <label class="mini" for="recipient">Recipient</label>
-      <input id="recipient" placeholder="Name / Team / Department" />
+      <label class="mini">Recipient</label>
+      <input id="recipient" placeholder="Team or Name" />
 
-      <label class="mini" for="signature">Scribe</label>
-      <input id="signature" placeholder="Your name (or leave blank for Anonymous)" />
+      <label class="mini">Scribe</label>
+      <input id="signature" placeholder="Your Name" />
 
-      <label class="mini" for="from">From</label>
+      <label class="mini">Role</label>
       <select id="from"></select>
 
-      <label class="mini" for="msg">Testimony</label>
-      <textarea id="msg" placeholder="Write with warmth. This will be visible in the archive."></textarea>
+      <label class="mini">Message</label>
+      <textarea id="msg" placeholder="Write your myth..."></textarea>
 
       <button class="primary" id="submit" disabled>RECORD INTO HISTORY</button>
-      <div id="status">Authentication Required</div>
-      <div class="flourish"></div>
+      <div id="status" style="font-size: 8px; text-align: center; margin-top: 15px; letter-spacing: 2px; color: var(--ash);">AUTH REQUIRED</div>
     </aside>
 
     <main class="grand-gallery">
-      <div class="gallery-header">
-        <div>
-          <h3>The Archive</h3>
-          <p>Search through messages — every note is a thread in the myth of ISA Cultural Fest 2026.</p>
-        </div>
-        <input id="search2" placeholder="Search the archives..." />
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; border-bottom: 1px solid var(--glass-border); padding-bottom: 20px;">
+        <h3 style="font-family: 'Cinzel'; letter-spacing: 5px; margin: 0;">THE ARCHIVE</h3>
+        <input id="search2" style="width: 250px; padding: 10px;" placeholder="Search threads..." />
       </div>
-
       <div id="feed"></div>
     </main>
   </div>
@@ -602,7 +248,6 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
   <script>
-    // --- CONFIG & FIREBASE ---
     firebase.initializeApp({
       apiKey: "AIzaSyBfj4i0quFWPTHCdnC8GT3BSEsKvvvqzRA",
       authDomain: "isa-culturtal-fest-2026.firebaseapp.com",
@@ -611,36 +256,23 @@
     });
     const db = firebase.database();
 
-    // --- SCROLL LOGIC ---
     function scrollToRegistry() {
-      const target = document.getElementById('registry-start');
-      if (target) setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+      document.getElementById('registry-start').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // --- CURSOR LOGIC ---
+    // Cursor
     const dot = document.querySelector("[data-cursor-dot]");
     const outline = document.querySelector("[data-cursor-outline]");
-    if (window.matchMedia("(pointer: fine)").matches) {
-      window.addEventListener("mousemove", e => {
-        dot.style.left = outline.style.left = `${e.clientX}px`;
-        dot.style.top  = outline.style.top  = `${e.clientY}px`;
-        outline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 420, fill: "forwards" });
-      });
-    }
+    window.addEventListener("mousemove", e => {
+      dot.style.left = outline.style.left = `${e.clientX}px`;
+      dot.style.top = outline.style.top = `${e.clientY}px`;
+      outline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
+    });
 
-    // --- SESSION & PERSISTENCE ---
+    // Auth & Logic
     let currentUser = JSON.parse(localStorage.getItem("scribe_user"));
-    const msgIn = document.getElementById("msg"),
-          recIn = document.getElementById("recipient");
-
-    window.onload = () => {
-      if(localStorage.getItem("draft_msg")) msgIn.value = localStorage.getItem("draft_msg");
-      if(localStorage.getItem("draft_rec")) recIn.value = localStorage.getItem("draft_rec");
-      if(currentUser) updateAuthUI(true);
-    };
-
-    msgIn.oninput = () => localStorage.setItem("draft_msg", msgIn.value);
-    recIn.oninput = () => localStorage.setItem("draft_rec", recIn.value);
+    const roles = ["Core Committee","PR","Finance","Co-Presidents","Helpers","Activity Team","HR","Ambassadors","Attendees"];
+    roles.forEach(r => document.getElementById("from").add(new Option(r, r)));
 
     function handleCredentialResponse(response){
       const payload = JSON.parse(atob(response.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));
@@ -653,96 +285,63 @@
       document.getElementById("google-btn").style.display = isLoggedIn ? "none" : "block";
       document.getElementById("signout-btn").style.display = isLoggedIn ? "block" : "none";
       document.getElementById("submit").disabled = !isLoggedIn;
-      document.getElementById("status").textContent = isLoggedIn ? "Scribe Recognized" : "Authentication Required";
+      document.getElementById("status").textContent = isLoggedIn ? "SCRIBE RECOGNIZED" : "AUTH REQUIRED";
     }
+
+    if(currentUser) updateAuthUI(true);
 
     document.getElementById("signout-btn").onclick = () => {
       localStorage.clear();
       location.reload();
     };
 
-    // --- APP DATA ---
-    const roles = ["Core Committee","PR","Finance","Co-Presidents","Helpers","Activity Team","HR","Ambassadors","Attendees"];
-    roles.forEach(r => document.getElementById("from").add(new Option(r, r)));
-
     document.getElementById("submit").onclick = function() {
-      const targetName = recIn.value.trim();
-      const message = msgIn.value.trim();
+      const targetName = document.getElementById("recipient").value.trim();
+      const message = document.getElementById("msg").value.trim();
       if(!targetName || !message) return;
-
-      this.disabled = true;
       this.innerText = "ETCHING...";
-
       const newKey = db.ref().child("registry").push().key;
       db.ref("registry/" + newKey).set({
-        id: newKey,
-        targetName,
-        fromDept: document.getElementById("from").value,
-        message,
-        signature: document.getElementById("signature").value.trim() || 'Anonymous',
-        authorId: currentUser.id,
-        timestamp: Date.now()
+        id: newKey, targetName, fromDept: document.getElementById("from").value,
+        message, signature: document.getElementById("signature").value || 'Anonymous',
+        authorId: currentUser.id, timestamp: Date.now()
       }).then(() => {
-        msgIn.value = "";
-        recIn.value = "";
-        localStorage.removeItem("draft_msg");
-        localStorage.removeItem("draft_rec");
-        this.disabled = false;
+        document.getElementById("msg").value = "";
         this.innerText = "RECORD INTO HISTORY";
       });
     };
 
-    // --- FEED & SEARCH ---
     db.ref("registry").on("value", snap => {
       const feed = document.getElementById("feed");
-      const data = snap.val();
-      const items = data ? Object.values(data).sort((a,b) => b.timestamp - a.timestamp) : [];
-
-      const esc = (s="") => s
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-
+      const items = snap.val() ? Object.values(snap.val()).sort((a,b) => b.timestamp - a.timestamp) : [];
+      
       const render = (list) => {
         feed.innerHTML = "";
         list.forEach(item => {
           const art = document.createElement("div");
           art.className = "artwork";
-
           art.innerHTML = `
-            <div class="quote">“${esc(item.message)}”</div>
-            <div class="sig">
-              <span class="pill">${esc(item.signature).toUpperCase()}</span>
-              <span class="pill">${esc(item.fromDept).toUpperCase()}</span>
-              <span style="opacity:.75; letter-spacing:3px;">→</span>
-              <span class="pill">${esc(item.targetName).toUpperCase()}</span>
+            <div class="quote">“${item.message}”</div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <span class="pill">${item.signature}</span>
+              <span class="pill">${item.fromDept}</span>
+              <span style="color:var(--accent-cyan); align-self: center;">→</span>
+              <span class="pill" style="border-color: var(--accent-purple); color: var(--accent-purple);">${item.targetName}</span>
             </div>
           `;
-
           if(currentUser && item.authorId === currentUser.id){
             const del = document.createElement("div");
-            del.className = "redact";
-            del.innerHTML = "REDACT ENTRY";
+            del.className = "redact"; del.innerText = "REDACT";
             del.onclick = () => db.ref("registry/" + item.id).remove();
             art.appendChild(del);
           }
-
           feed.appendChild(art);
         });
       };
-
       render(items);
-
       document.getElementById("search2").oninput = (e) => {
         const term = e.target.value.toLowerCase();
-        render(items.filter(i =>
-          (i.targetName || "").toLowerCase().includes(term) ||
-          (i.message || "").toLowerCase().includes(term) ||
-          (i.signature || "").toLowerCase().includes(term) ||
-          (i.fromDept || "").toLowerCase().includes(term)
-        ));
+        render(items.filter(i => i.message.toLowerCase().includes(term) || i.targetName.toLowerCase().includes(term)));
       };
     });
   </script>
