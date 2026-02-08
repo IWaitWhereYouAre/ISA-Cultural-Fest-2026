@@ -11,193 +11,174 @@
 
   <style>
     :root {
-      /* Ethereal Twilight Palette */
-      --night: #0B0A15;           /* Deep space indigo */
-      --nocturne: #121124;        /* Frosted panel */
-      --stardust: #F1F5F9;        /* Off-white text */
-      --ash: #94A3B8;             /* Muted slate */
+      /* Twilight Silk Palette */
+      --night: #141529;           /* Warmer deep indigo */
+      --panel: rgba(30, 32, 66, 0.7); 
+      --vellum: #FDFCF0;          /* Warm cream (The "Luxury" factor) */
+      --stardust: #E0E7FF;        /* Soft blue-white text */
       
       /* Pastel Accents */
-      --accent-blue: #A5B4FC;     /* Pastel Periwinkle */
-      --accent-purple: #D8B4FE;   /* Pastel Lavender */
-      --accent-cyan: #99F6E4;     /* Minty Glow */
+      --accent-blue: #B2C0FF;     /* Periwinkle */
+      --accent-purple: #D7BBF5;   /* Lavender */
+      --accent-warm: #FFE4D6;     /* Soft Peach/Cream for warmth */
       
-      --glass: rgba(255, 255, 255, 0.03);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --inkline: rgba(165, 180, 252, 0.15);
-
-      --shadow: 0 24px 80px rgba(0,0,0,0.4);
+      --glass: rgba(255, 255, 255, 0.04);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      
       --radius-xl: 32px;
       --radius-lg: 20px;
-      --radius-md: 12px;
-
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
       --t: 500ms var(--ease);
     }
 
-    /* --- Background Nebula --- */
     body {
       margin: 0;
-      width: 100%;
       background: var(--night);
       color: var(--stardust);
       font-family: "Cormorant Garamond", serif;
       overflow-x: hidden;
     }
 
+    /* Ambient Warmth Background */
     body::before {
       content: "";
       position: fixed; inset: 0;
       pointer-events: none;
       background:
-        radial-gradient(circle at 80% 20%, rgba(216, 180, 254, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 20% 80%, rgba(165, 180, 252, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(153, 246, 228, 0.03) 0%, transparent 50%);
+        radial-gradient(circle at 85% 15%, rgba(215, 187, 245, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 15% 85%, rgba(178, 192, 255, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(253, 252, 240, 0.03) 0%, transparent 60%);
       z-index: -1;
     }
 
     /* --- Custom Cursor --- */
-    .cursor-dot, .cursor-outline {
-      pointer-events: none; position: fixed; top: 0; left: 0;
-      transform: translate(-50%,-50%); border-radius: 50%; z-index: 9999; display: none;
-    }
-    @media (pointer:fine) {
-      .cursor-dot, .cursor-outline { display: block; }
-      body { cursor: none; }
-      button, input, select, textarea, .scroll-indicator, .artwork { cursor: none; }
-    }
-    .cursor-dot { width: 6px; height: 6px; background: var(--accent-cyan); box-shadow: 0 0 15px var(--accent-cyan); }
-    .cursor-outline { width: 40px; height: 40px; border: 1px solid var(--accent-purple); transition: transform 0.2s; backdrop-filter: blur(1px); }
+    .cursor-dot { width: 8px; height: 8px; background: var(--vellum); box-shadow: 0 0 15px var(--accent-blue); position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
+    .cursor-outline { width: 40px; height: 40px; border: 1px solid var(--accent-purple); position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: transform 0.15s ease-out; }
 
     /* --- Hero Section --- */
     .hero-section {
-      min-height: 100dvh; display: flex; flex-direction: column; justify-content: center;
-      align-items: center; text-align: center; padding: 20px; isolation: isolate;
+      min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 20px;
     }
 
     .hero-shell {
       width: min(1000px, 100%);
       padding: clamp(40px, 8vw, 80px);
       border-radius: var(--radius-xl);
-      background: var(--glass);
-      backdrop-filter: blur(20px);
+      background: var(--panel);
+      backdrop-filter: blur(25px);
       border: 1px solid var(--glass-border);
-      box-shadow: var(--shadow);
-      position: relative;
+      text-align: center;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.5);
     }
 
     .kicker {
-      font-family: "Cinzel", serif; font-size: 10px; letter-spacing: 6px;
-      color: var(--accent-cyan); text-transform: uppercase; margin-bottom: 20px;
+      font-family: "Cinzel", serif; font-size: 11px; letter-spacing: 5px;
+      color: var(--accent-warm); text-transform: uppercase; margin-bottom: 20px;
     }
 
     h1 {
       font-family: "Playfair Display", serif; font-style: italic; font-weight: 500;
-      font-size: clamp(2.5rem, 8vw, 6rem); margin: 0;
-      background: linear-gradient(135deg, #FFF 30%, var(--accent-blue) 100%);
+      font-size: clamp(2.8rem, 8vw, 6.5rem); margin: 0;
+      background: linear-gradient(135deg, var(--vellum) 20%, var(--accent-blue) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      line-height: 1.1;
+      line-height: 1;
     }
 
     .subtitle {
-      margin: 24px auto; font-size: clamp(1.1rem, 2vw, 1.4rem);
-      color: var(--ash); max-width: 55ch; line-height: 1.6;
+      margin: 28px auto; font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: rgba(224, 231, 255, 0.8); max-width: 55ch; line-height: 1.6;
     }
 
-    /* --- Layout --- */
-    .museum-container {
-      display: grid; grid-template-columns: 420px 1fr; border-top: 1px solid var(--glass-border);
-    }
-
+    /* --- Form & Layout --- */
+    .museum-container { display: grid; grid-template-columns: 420px 1fr; border-top: 1px solid var(--glass-border); }
     @media (max-width: 1100px) { .museum-container { grid-template-columns: 1fr; } }
 
-    .scribe-desk {
-      padding: 60px 40px; border-right: 1px solid var(--glass-border);
-      background: rgba(255,255,255,0.01);
-    }
+    .scribe-desk { padding: 60px 40px; border-right: 1px solid var(--glass-border); background: rgba(255,255,255,0.01); }
 
-    .panel-title h2 { font-family: "Playfair Display", serif; font-style: italic; font-size: 2.2rem; margin: 0; color: var(--accent-purple); }
-    
-    /* --- Form Elements --- */
     label.mini {
       display: block; font-family: "Montserrat", sans-serif; font-size: 9px;
-      letter-spacing: 3px; color: var(--accent-blue); text-transform: uppercase; margin: 20px 0 8px;
+      letter-spacing: 3px; color: var(--accent-purple); text-transform: uppercase; margin: 24px 0 8px;
     }
 
     input, select, textarea {
       width: 100%; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.2);
-      color: #fff; padding: 15px; border-radius: var(--radius-md); outline: none;
-      font-family: "Cormorant Garamond", serif; font-size: 1.1rem; transition: var(--t);
+      color: var(--vellum); padding: 16px; border-radius: 12px; outline: none;
+      font-family: "Cormorant Garamond", serif; font-size: 1.15rem; transition: var(--t);
     }
 
-    input:focus, textarea:focus { border-color: var(--accent-blue); background: rgba(165,180,252,0.05); }
+    input:focus { border-color: var(--accent-blue); background: rgba(178, 192, 255, 0.05); }
 
     button.primary {
-      width: 100%; margin-top: 25px; padding: 20px; border-radius: 50px;
+      width: 100%; margin-top: 30px; padding: 22px; border-radius: 50px;
       border: none; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
       color: var(--night); font-family: "Montserrat", sans-serif; font-weight: 600;
-      font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
-      transition: var(--t); box-shadow: 0 10px 30px rgba(165,180,252,0.2);
+      font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+      transition: all 0.4s ease; cursor: pointer;
     }
 
-    button.primary:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(165,180,252,0.4); opacity: 0.9; }
-    button.primary:disabled { opacity: 0.2; filter: grayscale(1); }
+    button.primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(178, 192, 255, 0.3);
+      filter: brightness(1.1);
+    }
 
-    /* --- Archive Feed --- */
+    /* --- Archive --- */
     .grand-gallery { padding: 60px 50px; }
-    
+
     .artwork {
       border: 1px solid var(--glass-border);
-      background: rgba(255, 255, 255, 0.02);
-      backdrop-filter: blur(10px);
+      background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      backdrop-filter: blur(15px);
       border-radius: var(--radius-lg);
-      padding: 30px; margin-bottom: 20px;
+      padding: 35px; margin-bottom: 25px;
       transition: var(--t);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
 
     .artwork:hover {
-      border-color: rgba(165, 180, 252, 0.4);
-      transform: scale(1.01);
-      background: rgba(255, 255, 255, 0.04);
+      border-color: var(--accent-purple);
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.05);
     }
 
-    .quote { font-size: 1.6rem; font-style: italic; line-height: 1.4; margin-bottom: 20px; color: #fff; }
+    .quote { font-size: 1.7rem; font-style: italic; line-height: 1.4; margin-bottom: 25px; color: var(--vellum); }
 
     .pill {
-      display: inline-flex; padding: 6px 14px; border-radius: 50px;
-      border: 1px solid rgba(165, 180, 252, 0.3);
-      background: rgba(165, 180, 252, 0.05);
+      display: inline-flex; padding: 7px 16px; border-radius: 50px;
+      border: 1px solid rgba(178, 192, 255, 0.2);
+      background: rgba(178, 192, 255, 0.05);
       color: var(--accent-blue); font-family: "Montserrat", sans-serif;
-      font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
     }
 
     .redact {
-      margin-top: 20px; font-family: "Montserrat", sans-serif; font-size: 8px;
-      letter-spacing: 3px; color: var(--ash); border: 1px solid var(--glass-border);
-      padding: 8px 15px; border-radius: 50px; display: inline-block; transition: 0.3s;
+      margin-top: 25px; font-family: "Montserrat", sans-serif; font-size: 8px;
+      letter-spacing: 3px; color: var(--accent-warm); border: 1px solid var(--glass-border);
+      padding: 10px 18px; border-radius: 50px; display: inline-block; cursor: pointer; transition: 0.3s;
     }
-    .redact:hover { color: #ff6b6b; border-color: #ff6b6b; }
+    .redact:hover { color: #fff; border-color: var(--accent-warm); background: rgba(255,255,255,0.05); }
 
     .scroll-indicator {
-      margin-top: 40px; width: 50px; height: 50px; border-radius: 50%;
-      border: 1px solid var(--accent-blue); display: flex; align-items: center; justify-content: center;
-      animation: float 3s infinite ease-in-out;
+      margin-top: 45px; width: 50px; height: 50px; border-radius: 50%;
+      border: 1px solid var(--accent-warm); display: flex; align-items: center; justify-content: center;
+      animation: float 3s infinite ease-in-out; cursor: pointer;
     }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
+
   </style>
 </head>
 
 <body>
-  <div class="cursor-dot" data-cursor-dot></div>
-  <div class="cursor-outline" data-cursor-outline></div>
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
 
   <section class="hero-section">
     <div class="hero-shell">
       <div class="kicker">The Collective Myth</div>
       <h1>ISA Cultural Fest 2026</h1>
-      <div class="subtitle">A living archive of gratitude. Every thread of testimony weaves the legend of the students who built this legacy.</div>
+      <div class="subtitle">A curated sanctuary of student legacies. Each message is a silk thread in the tapestry of our shared history.</div>
       <div class="scroll-indicator" onclick="scrollToRegistry()">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="1.5">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-warm)" stroke-width="1.5">
           <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
         </svg>
       </div>
@@ -207,11 +188,11 @@
   <div class="museum-container" id="registry-start">
     <aside class="scribe-desk">
       <div class="panel-title">
-        <h2>The Registry</h2>
-        <p style="color: var(--ash); font-size: 0.9rem;">Sign in to record your testimony into the nebula.</p>
+        <h2 style="font-family: 'Playfair Display'; font-style: italic; color: var(--accent-purple); font-size: 2.2rem; margin: 0;">The Registry</h2>
+        <p style="color: rgba(224, 231, 255, 0.6); font-size: 0.95rem; margin-top: 10px;">Etch your testimony into the twilight archive.</p>
       </div>
 
-      <div id="auth-ui">
+      <div id="auth-ui" style="margin-top: 30px;">
         <div id="g_id_onload"
              data-client_id="671163289983-2056vpimutuatgerek6676pr1ob9p1n0.apps.googleusercontent.com"
              data-callback="handleCredentialResponse"></div>
@@ -220,25 +201,25 @@
       </div>
 
       <label class="mini">Recipient</label>
-      <input id="recipient" placeholder="Team or Name" />
+      <input id="recipient" placeholder="To whom do you scribe?" />
 
-      <label class="mini">Scribe</label>
-      <input id="signature" placeholder="Your Name" />
+      <label class="mini">Your Name</label>
+      <input id="signature" placeholder="Signature" />
 
-      <label class="mini">Role</label>
+      <label class="mini">Department</label>
       <select id="from"></select>
 
-      <label class="mini">Message</label>
-      <textarea id="msg" placeholder="Write your myth..."></textarea>
+      <label class="mini">Testimony</label>
+      <textarea id="msg" rows="5" placeholder="Write with warmth..."></textarea>
 
       <button class="primary" id="submit" disabled>RECORD INTO HISTORY</button>
-      <div id="status" style="font-size: 8px; text-align: center; margin-top: 15px; letter-spacing: 2px; color: var(--ash);">AUTH REQUIRED</div>
+      <div id="status" style="font-size: 9px; text-align: center; margin-top: 20px; letter-spacing: 3px; color: var(--accent-warm);">IDENTITY REQUIRED</div>
     </aside>
 
     <main class="grand-gallery">
-      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; border-bottom: 1px solid var(--glass-border); padding-bottom: 20px;">
-        <h3 style="font-family: 'Cinzel'; letter-spacing: 5px; margin: 0;">THE ARCHIVE</h3>
-        <input id="search2" style="width: 250px; padding: 10px;" placeholder="Search threads..." />
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px; border-bottom: 1px solid var(--glass-border); padding-bottom: 25px;">
+        <h3 style="font-family: 'Cinzel'; letter-spacing: 6px; margin: 0; font-weight: 400; font-size: 1.1rem;">THE ARCHIVE</h3>
+        <input id="search2" style="width: 280px; padding: 12px; font-size: 1rem;" placeholder="Search the threads..." />
       </div>
       <div id="feed"></div>
     </main>
@@ -260,19 +241,22 @@
       document.getElementById('registry-start').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Cursor
-    const dot = document.querySelector("[data-cursor-dot]");
-    const outline = document.querySelector("[data-cursor-outline]");
+    // Smooth Cursor
+    const dot = document.querySelector(".cursor-dot");
+    const outline = document.querySelector(".cursor-outline");
     window.addEventListener("mousemove", e => {
-      dot.style.left = outline.style.left = `${e.clientX}px`;
-      dot.style.top = outline.style.top = `${e.clientY}px`;
-      outline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
+      dot.style.left = `${e.clientX}px`;
+      dot.style.top = `${e.clientY}px`;
+      setTimeout(() => {
+        outline.style.left = `${e.clientX}px`;
+        outline.style.top = `${e.clientY}px`;
+      }, 50);
     });
 
-    // Auth & Logic
     let currentUser = JSON.parse(localStorage.getItem("scribe_user"));
     const roles = ["Core Committee","PR","Finance","Co-Presidents","Helpers","Activity Team","HR","Ambassadors","Attendees"];
-    roles.forEach(r => document.getElementById("from").add(new Option(r, r)));
+    const select = document.getElementById("from");
+    roles.forEach(r => select.add(new Option(r, r)));
 
     function handleCredentialResponse(response){
       const payload = JSON.parse(atob(response.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));
@@ -285,7 +269,7 @@
       document.getElementById("google-btn").style.display = isLoggedIn ? "none" : "block";
       document.getElementById("signout-btn").style.display = isLoggedIn ? "block" : "none";
       document.getElementById("submit").disabled = !isLoggedIn;
-      document.getElementById("status").textContent = isLoggedIn ? "SCRIBE RECOGNIZED" : "AUTH REQUIRED";
+      document.getElementById("status").textContent = isLoggedIn ? "SCRIBE RECOGNIZED" : "IDENTITY REQUIRED";
     }
 
     if(currentUser) updateAuthUI(true);
@@ -322,16 +306,16 @@
           art.className = "artwork";
           art.innerHTML = `
             <div class="quote">“${item.message}”</div>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
               <span class="pill">${item.signature}</span>
-              <span class="pill">${item.fromDept}</span>
-              <span style="color:var(--accent-cyan); align-self: center;">→</span>
-              <span class="pill" style="border-color: var(--accent-purple); color: var(--accent-purple);">${item.targetName}</span>
+              <span class="pill" style="color: var(--accent-purple); border-color: rgba(215, 187, 245, 0.2);">${item.fromDept}</span>
+              <span style="color:var(--accent-warm); font-size: 1.2rem;">→</span>
+              <span class="pill" style="border-color: var(--vellum); color: var(--vellum);">${item.targetName}</span>
             </div>
           `;
           if(currentUser && item.authorId === currentUser.id){
             const del = document.createElement("div");
-            del.className = "redact"; del.innerText = "REDACT";
+            del.className = "redact"; del.innerText = "REDACT FROM TIME";
             del.onclick = () => db.ref("registry/" + item.id).remove();
             art.appendChild(del);
           }
