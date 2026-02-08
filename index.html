@@ -11,16 +11,15 @@
 
     <style>
         :root {
-            /* Your New Palette */
-            --cream-light: #FDFCF0;      /* Champagne Cream */
-            --lavender-dust: #27BBF5;    /* Dusty Lavender */
-            --rose-peach: #F4A4A6;       /* Rose Peach */
-            --periwinkle: #82C0FF;       /* Periwinkle Silk */
+            /* Luxurious Light Palette */
+            --silk-ivory: #F9F7F2;      
+            --pearl-white: rgba(255, 255, 255, 0.7);
+            --dusty-rose: #D4A3A4;
+            --soft-gold: #B89B72;
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --obsidian: #1A1A1A; /* For text readability */
+            --accent-blue: #A9C9E0;
             
-            /* UI Foundation */
-            --obsidian: #080808;
-            --ink-border: rgba(253, 252, 240, 0.15); 
-            --blood-red: #8B0000;
             --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -28,14 +27,24 @@
 
         body, html {
             margin: 0;
-            background-color: var(--obsidian);
-            color: var(--cream-light);
+            /* Animated Luxurious Gradient */
+            background: linear-gradient(-45deg, #F9F7F2, #FFF0F0, #E3F2FD, #FDFCF0);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--obsidian);
             font-family: 'Cormorant Garamond', serif;
             overflow-x: hidden;
             width: 100%;
+            min-height: 100vh;
         }
 
-        /* --- DEVICE ADAPTIVE CURSOR --- */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- CURSOR --- */
         .cursor-dot, .cursor-outline {
             pointer-events: none;
             position: fixed;
@@ -52,8 +61,8 @@
             button, input, select, textarea, .scroll-indicator, .artwork { cursor: none; }
         }
 
-        .cursor-dot { width: 6px; height: 6px; background-color: var(--periwinkle); }
-        .cursor-outline { width: 40px; height: 40px; border: 1px solid var(--lavender-dust); transition: transform 0.2s ease-out; }
+        .cursor-dot { width: 6px; height: 6px; background-color: var(--soft-gold); }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid var(--soft-gold); transition: transform 0.2s ease-out; }
 
         /* --- HERO SECTION --- */
         .hero-section {
@@ -64,17 +73,16 @@
             align-items: center;
             text-align: center;
             padding: 20px;
-            background: radial-gradient(circle at center, #121212 0%, var(--obsidian) 100%);
         }
 
         .hero-section h1 {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: clamp(2.5rem, 10vw, 8.5rem);
+            font-size: clamp(2.5rem, 10vw, 7rem);
             font-weight: 400;
             margin: 0;
-            color: var(--cream-light);
-            text-shadow: 0 0 30px rgba(130, 192, 255, 0.15);
+            color: var(--obsidian);
+            letter-spacing: -2px;
         }
 
         @keyframes bounce {
@@ -88,62 +96,88 @@
             display: grid;
             grid-template-columns: 460px 1fr;
             min-height: 100vh;
-            border-top: 1px solid var(--ink-border);
+            border-top: 1px solid var(--glass-border);
         }
 
         @media (max-width: 1100px) {
             .museum-container { grid-template-columns: 1fr; }
-            .scribe-desk { border-right: none; border-bottom: 1px solid var(--ink-border); padding: 60px 30px !important; }
-            .grand-gallery { padding: 60px 30px !important; }
+            .scribe-desk { border-right: none; border-bottom: 1px solid var(--glass-border); padding: 60px 30px !important; }
         }
 
         .scribe-desk {
             padding: 80px 60px;
-            border-right: 1px solid var(--ink-border);
+            border-right: 1px solid var(--glass-border);
             display: flex;
             flex-direction: column;
-            background-color: var(--obsidian);
+            background: var(--pearl-white);
+            backdrop-filter: blur(15px); /* Glassmorphism */
+        }
+
+        .grand-gallery {
+            padding: 80px;
+            background: rgba(255,255,255,0.2);
         }
 
         /* --- FORM ELEMENTS --- */
         input, select, textarea {
             width: 100%;
             border: none;
-            border-bottom: 1px solid var(--ink-border);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
             background: transparent;
             font-family: 'Cormorant Garamond';
             font-size: 1.2rem;
-            color: var(--cream-light);
+            color: var(--obsidian);
             padding: 12px 0;
             margin-bottom: 40px;
             outline: none;
-            border-radius: 0;
         }
 
-        input::placeholder, textarea::placeholder { color: rgba(253, 252, 240, 0.4); }
+        input::placeholder, textarea::placeholder { color: rgba(0, 0, 0, 0.3); }
 
         button.primary {
-            background: transparent; 
-            color: var(--rose-peach); 
-            border: 1px solid var(--rose-peach);
+            background: var(--obsidian); 
+            color: white; 
+            border: 1px solid var(--obsidian);
             padding: 22px; 
             font-family: 'Montserrat'; 
             font-size: 10px; 
-            letter-spacing: 0.5rem;
+            letter-spacing: 0.4rem;
             cursor: pointer; 
             transition: var(--transition); 
             text-transform: uppercase;
             width: 100%;
         }
 
-        button.primary:hover:not(:disabled) { background: var(--rose-peach); color: var(--obsidian); }
-        button.primary:disabled { opacity: 0.3; cursor: default; }
+        button.primary:hover:not(:disabled) { 
+            background: transparent; 
+            color: var(--obsidian); 
+        }
+
+        button.primary:disabled { opacity: 0.2; }
 
         /* --- ARTWORK FEED --- */
-        .artwork { padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,0.05); transition: var(--transition); }
-        .artwork:hover { padding-left: 10px; border-bottom-color: var(--periwinkle); }
-        .quote { font-size: clamp(1.4rem, 4vw, 1.9rem); font-style: italic; line-height: 1.4; margin-bottom: 15px; }
-        .sig { font-family: 'Montserrat'; font-size: 9px; color: var(--lavender-dust); letter-spacing: 2px; }
+        .artwork { 
+            padding: 40px 0; 
+            border-bottom: 1px solid rgba(0,0,0,0.05); 
+            transition: var(--transition); 
+        }
+        .artwork:hover { padding-left: 20px; }
+        
+        .quote { 
+            font-size: clamp(1.4rem, 4vw, 2rem); 
+            font-style: italic; 
+            line-height: 1.3; 
+            margin-bottom: 15px;
+            color: #444;
+        }
+        
+        .sig { 
+            font-family: 'Montserrat'; 
+            font-size: 9px; 
+            color: var(--soft-gold); 
+            letter-spacing: 2px; 
+            font-weight: 500;
+        }
 
     </style>
 </head>
@@ -154,14 +188,14 @@
     <div class="cursor-outline" data-cursor-outline></div>
 
     <section class="hero-section">
-        <div style="font-family:Cinzel; font-size:10px; letter-spacing:6px; color:var(--periwinkle); margin-bottom:20px;">The Collective Myth</div>
+        <div style="font-family:Cinzel; font-size:11px; letter-spacing:8px; color:var(--soft-gold); margin-bottom:20px;">The Collective Myth</div>
         <h1>ISA Cultural Fest 2026</h1>
-        <div style="font-family:Montserrat; font-size:8px; letter-spacing:4px; color:var(--rose-peach); margin-top:30px; opacity:0.8;">ETCHING STUDENT LEGACIES INTO TIME</div>
+        <div style="font-family:Montserrat; font-size:9px; letter-spacing:5px; color:var(--dusty-rose); margin-top:30px; font-weight:300;">ETCHING STUDENT LEGACIES INTO TIME</div>
         
         <div class="scroll-indicator" 
              style="margin-top: 60px; cursor:pointer; animation: bounce 2s infinite;" 
              onclick="scrollToRegistry()">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--cream-light)" stroke-width="1">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--obsidian)" stroke-width="1">
                 <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
             </svg>
         </div>
@@ -169,12 +203,12 @@
 
     <div class="museum-container" id="registry-start">
         <aside class="scribe-desk">
-            <h2 style="font-family:'Playfair Display'; font-style:italic; font-size:2.8rem; margin:0 0 40px 0; color: var(--cream-light);">The Registry</h2>
+            <h2 style="font-family:'Playfair Display'; font-style:italic; font-size:2.8rem; margin:0 0 40px 0;">The Registry</h2>
             
             <div id="auth-ui">
                 <div id="g_id_onload" data-client_id="671163289983-2056vpimutuatgerek6676pr1ob9p1n0.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
                 <div class="g_id_signin" id="google-btn" style="margin-bottom: 40px;"></div>
-                <button id="signout-btn" class="primary" style="display:none; border-color:var(--blood-red); color:var(--blood-red); margin-bottom:40px; padding: 10px;">REVOKE SCRIBE STATUS</button>
+                <button id="signout-btn" class="primary" style="display:none; border-color:#8B0000; color:#8B0000; margin-bottom:40px; padding: 10px; background:transparent;">REVOKE SCRIBE STATUS</button>
             </div>
 
             <input id="recipient" placeholder="Recipient (Name or Team)" />
@@ -183,11 +217,11 @@
             <textarea id="msg" style="min-height: 120px;" placeholder="The Testimony..."></textarea>
 
             <button class="primary" id="submit" disabled>RECORD INTO HISTORY</button>
-            <div id="status" style="font-size: 8px; text-align: center; margin-top: 20px; color: var(--periwinkle); letter-spacing: 2px; text-transform: uppercase;">Authentication Required</div>
+            <div id="status" style="font-size: 9px; text-align: center; margin-top: 20px; color: var(--soft-gold); letter-spacing: 2px; text-transform: uppercase; font-weight:600;">Authentication Required</div>
         </aside>
 
         <main class="grand-gallery">
-            <header style="margin-bottom: 60px; border-bottom: 1px solid var(--ink-border); padding-bottom: 15px;">
+            <header style="margin-bottom: 60px; border-bottom: 1px solid var(--glass-border); padding-bottom: 15px;">
                 <input id="search2" style="font-size: 1.4rem; border:none; margin-bottom: 0;" placeholder="Search the archives..." />
             </header>
             <div id="feed"></div>
@@ -198,7 +232,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
 <script>
-// --- CONFIG & FIREBASE ---
+// --- FIREBASE CONFIG ---
 firebase.initializeApp({
     apiKey: "AIzaSyBfj4i0quFWPTHCdnC8GT3BSEsKvvvqzRA",
     authDomain: "isa-culturtal-fest-2026.firebaseapp.com",
@@ -207,15 +241,12 @@ firebase.initializeApp({
 });
 const db = firebase.database();
 
-// --- SCROLL LOGIC ---
+// --- UI LOGIC ---
 function scrollToRegistry() {
-    const target = document.getElementById('registry-start');
-    if (target) {
-        setTimeout(() => { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50);
-    }
+    document.getElementById('registry-start').scrollIntoView({ behavior: 'smooth' });
 }
 
-// --- CURSOR LOGIC ---
+// Cursor
 const dot = document.querySelector("[data-cursor-dot]");
 const outline = document.querySelector("[data-cursor-outline]");
 if (window.matchMedia("(pointer: fine)").matches) {
@@ -226,7 +257,7 @@ if (window.matchMedia("(pointer: fine)").matches) {
     });
 }
 
-// --- SESSION & PERSISTENCE ---
+// Session
 let currentUser = JSON.parse(localStorage.getItem("scribe_user"));
 const msgIn = document.getElementById("msg"), recIn = document.getElementById("recipient");
 
@@ -258,10 +289,10 @@ document.getElementById("signout-btn").onclick = () => {
     location.reload();
 };
 
-// --- APP DATA ---
 const roles = ["Core Committee", "PR", "Finance", "Co-Presidents", "Helpers", "Activity Team", "HR", "Ambassadors", "Attendees"];
 roles.forEach(r => document.getElementById("from").add(new Option(r, r)));
 
+// Write
 document.getElementById("submit").onclick = function() {
     const targetName = recIn.value, message = msgIn.value;
     if(!targetName || !message) return;
@@ -279,7 +310,7 @@ document.getElementById("submit").onclick = function() {
     });
 };
 
-// --- FEED & SEARCH ---
+// Feed
 db.ref("registry").on("value", snap => {
     const feed = document.getElementById("feed");
     const data = snap.val();
@@ -294,14 +325,13 @@ db.ref("registry").on("value", snap => {
             if(currentUser && item.authorId === currentUser.id){
                 const del = document.createElement("div");
                 del.innerText = "[ REDACT ]";
-                del.style = "color:var(--blood-red); font-size:9px; margin-top:15px; cursor:pointer; letter-spacing:2px; font-family:Montserrat;";
+                del.style = "color:#8B0000; font-size:9px; margin-top:15px; cursor:pointer; letter-spacing:2px; font-family:Montserrat;";
                 del.onclick = () => db.ref("registry/"+item.id).remove();
                 art.appendChild(del);
             }
             feed.appendChild(art);
         });
     };
-
     render(items);
     document.getElementById("search2").oninput = (e) => {
         const term = e.target.value.toLowerCase();
